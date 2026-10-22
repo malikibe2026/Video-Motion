@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<title>Penduduk Mengikut Negeri, 2022–2024</title>
+<style>
+  html, body { margin: 0; background: #fff; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script>
+// Data dibekalkan oleh render.mjs (window.DATA) daripada fail CSV. Tiada angka ditulis tangan di sini.
+// Format: [{negeri, tahun, penduduk_ribu}, ...]
+const DATA = window.DATA || [];
+const META = window.META || {
+  tajuk: 'Penduduk Mengikut Negeri, 2022–2024',
+  unit: 'ribu orang',
+  sumber: 'Data rekaan untuk ujian',
+  jabatan: 'Jabatan Perangkaan Malaysia (contoh templat)',
+};
+
+const W = 1920, H = 1080;
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d');
+
+const COL = { bg: '#FFFFFF', ink: '#1A1A1A', mute: '#6B7280', grid: '#E5E7EB',
+              accent: '#0B3D91', grey1: '#C4CAD3', grey2: '#8A93A0' };
+const FONT = '"Inter", "DejaVu Sans", sans-serif';
+
+const negeriList = [...new Set(DATA.map(d => d.negeri))];
+const tahunList = [...new Set(DATA.map(d => d.tahun))].sort();
+const val = (n, y) => DATA.find(d => d.negeri === n && d.tahun === y).penduduk_ribu;
+const yearColor = y => y === tahunList[tahunList.length - 1] ? COL.accent
+                     : y === tahunList[0] ? COL.grey1 : COL.grey2;
+const fmt = n => Math.round(n).toLocaleString('en-US');
+const pct = (a, b) => ((b - a) / a * 100);
+const fmtPct = p => (p >= 0 ? '+' : '−') + Math.abs(p).toFixed(1) + '%';
+
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ease = x => 1 - Math.pow(1 - clamp(x), 3);          // easeOutCubic
+const prog = (t, a, d) => ease((t - a) / d);               // 0..1 antara a dan a+d
+
+const axisMax = Math.ceil(Math.max(...DATA.map(d => d.penduduk_ribu)) / 200) * 200 + 200;
+
+// Susunan babak (saat). Setiap babak >= 4 saat.
+const perN = 4;
+const SC = [];
+let cur = 0;
+const add = (id, dur) => { SC.push({ id, start: cur, dur }); cur += dur; };
+add('title', 4); add('context', 4);
+negeriList.forEach((n, i) => add('n' + i, perN));
+add('compare', 8); add('concl', 5); add('end', 4);
+const TOTAL = cur;
+
+function text(s, x, y, size, color, weight = 400, align = 'left', alpha = 1) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = color;
+  ctx.font = `${weight} ${size}px ${FONT}`;
+  ctx.textAlign = align;
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillText(s, x, y);
+  ctx.restore();
+}
+function rect(x, y, w, h, color, alpha = 1) {
+  ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = color;
+  ctx.fillRect(x, y, w, h); ctx.restore();
+}
+
+// Alfa babak: masuk 0.5s, keluar 0.5s
+function sceneAlpha(lt, dur) { return Math.min(clamp(lt / 0.5), clamp((dur - lt) / 0.5)); }
+
+function footer() {
+  text(`Sumber: ${META.sumber}  ·  Unit: ${META.unit}`, 96, H - 56, 28, COL.mute);
+}
+
+function sTitle(lt, a) {
+  text(META.tajuk, 96, 480, 84, COL.ink, 700, 'left', a * prog(lt, 0.2, 0.8));
+  rect(96, 520, 160 * prog(lt, 0.6, 0.8), 8, COL.accent, a);
+  text('Contoh ujian templat video statistik', 96, 610, 40, COL.mute, 400, 'left', a * prog(lt, 1.0, 0.8));
+}
+
+function sContext(lt, a) {
+  const lines = [
+    `${negeriList.length} negeri, ${tahunList.length} tahun (${tahunList[0]}–${tahunList[tahunList.length - 1]})`,
+    `Bilangan penduduk dalam ${META.unit}`,
+    'Setiap carta bermula dari sifar',
+  ];
+  lines.forEach((s, i) => text(s, 96, 420 + i * 100, 56, i === 0 ? COL.ink : COL.mute, i === 0 ? 600 : 400, 'left',
+                                a * prog(lt, 0.3 + i * 0.5, 0.7)));
+}
+
+function sNegeri(i, lt, a) {
+  const n = negeriList[i];
+  const y0 = tahunList[0], y1 = tahunList[tahunList.length - 1];
+  const p = pct(val(n, y0), val(n, y1));
+  text(n, 96, 200, 88, COL.ink, 700, 'left', a * prog(lt, 0, 0.6));
+  text(`Penduduk (${META.unit})`, 96, 260, 36, COL.mute, 400, 'left', a * prog(lt, 0.2, 0.6));
+
+  const x0 = 360, wMax = 1300, bh = 100, gap = 50, top = 320;
+  tahunList.forEach((y, k) => {
+    const yy = top + k * (bh + gap);
+    const g = prog(lt, 0.5 + k * 0.45, 1.0);
+    const v = val(n, y);
+    text(String(y), x0 - 28, yy + bh / 2 + 16, 48, COL.ink, 500, 'right', a);
+    rect(x0, yy, wMax * (v / axisMax) * g, bh, yearColor(y), a);
+    text(fmt(v), x0 + wMax * (v / axisMax) * g + 24, yy + bh / 2 + 18, 56, COL.ink, 600, 'left', a * clamp((g - 0.85) / 0.15));
+  });
+  rect(x0, top - 20, 3, tahunList.length * (bh + gap) - gap + 40, COL.ink, a);   // paksi sifar
+
+  const pc = p >= 0 ? COL.accent : COL.ink;
+  text(`${fmtPct(p)}`, 96, 900, 120, pc, 700, 'left', a * prog(lt, 2.2, 0.8));
+  text(`${y0}–${y1}`, 96, 950, 36, COL.mute, 400, 'left', a * prog(lt, 2.4, 0.8));
+}
+
+function sCompare(lt, a) {
+  text('Perbandingan antara negeri', 96, 150, 64, COL.ink, 700, 'left', a * prog(lt, 0, 0.6));
+  const L = 220, R = W - 120, T = 250, B = 880;
+  const gw = (R - L) / negeriList.length;
+  for (let v = 0; v <= axisMax; v += 200) {
+    const yy = B - (B - T) * v / axisMax;
+    rect(L, yy, R - L, v === 0 ? 3 : 1, v === 0 ? COL.ink : COL.grid, a);
+    text(fmt(v), L - 20, yy + 10, 28, COL.mute, 400, 'right', a);
+  }
+  const bw = Math.min(150, gw / (tahunList.length + 1.5));
+  negeriList.forEach((n, i) => {
+    const cx = L + gw * (i + 0.5);
+    tahunList.forEach((y, k) => {
+      const g = prog(lt, 0.8 + i * 0.6 + k * 0.3, 1.0);
+      const v = val(n, y);
+      const bx = cx + (k - (tahunList.length - 1) / 2) * (bw + 10) - bw / 2;
+      const bhh = (B - T) * v / axisMax * g;
+      rect(bx, B - bhh, bw, bhh, yearColor(y), a);
+      text(fmt(v), bx + bw / 2, B - bhh - 14, 28, COL.ink, 600, 'center', a * clamp((g - 0.85) / 0.15));
+    });
+    text(n, cx, B + 56, 40, COL.ink, 600, 'center', a);
+  });
+  tahunList.forEach((y, k) => {                                    // petunjuk
+    const lx = R - 480 + k * 160;
+    rect(lx, 150 - 28, 28, 28, yearColor(y), a);
+    text(String(y), lx + 40, 150, 32, COL.ink, 500, 'left', a);
+  });
+}
+
+function sConcl(lt, a) {
+  const y0 = tahunList[0], y1 = tahunList[tahunList.length - 1];
+  text(`Perubahan penduduk ${y0}–${y1}`, 96, 240, 52, COL.mute, 500, 'left', a * prog(lt, 0, 0.6));
+  negeriList.forEach((n, i) => {
+    const p = pct(val(n, y0), val(n, y1));
+    const al = a * prog(lt, 0.5 + i * 0.5, 0.7);
+    const yy = 420 + i * 140;
+    text(n, 96, yy, 64, COL.ink, 600, 'left', al);
+    text(fmtPct(p), 760, yy, 96, p >= 0 ? COL.accent : COL.ink, 700, 'left', al);
+    text(`${fmt(val(n, y0))} → ${fmt(val(n, y1))}`, 1160, yy - 4, 48, COL.mute, 400, 'left', al);
+  });
+}
+
+function sEnd(lt, a) {
+  text('Sumber data', 96, 420, 40, COL.mute, 500, 'left', a * prog(lt, 0.2, 0.6));
+  text(META.sumber, 96, 500, 64, COL.ink, 700, 'left', a * prog(lt, 0.4, 0.6));
+  text(META.jabatan, 96, 620, 44, COL.ink, 400, 'left', a * prog(lt, 0.8, 0.6));
+  text('Perubahan peratus dikira: (nilai akhir − nilai awal) ÷ nilai awal', 96, 720, 32, COL.mute, 400, 'left', a * prog(lt, 1.2, 0.6));
+}
+
+// Fungsi tulen: bingkai ditentukan sepenuhnya oleh t (saat). Tiada keadaan dibawa antara bingkai.
+function draw(t) {
+  ctx.clearRect(0, 0, W, H);
+  rect(0, 0, W, H, COL.bg);
+  for (const s of SC) {
+    const lt = t - s.start;
+    if (lt < 0 || lt >= s.dur) continue;
+    const a = sceneAlpha(lt, s.dur);
+    if (s.id === 'title') sTitle(lt, a);
+    else if (s.id === 'context') sContext(lt, a);
+    else if (s.id.startsWith('n')) sNegeri(+s.id.slice(1), lt, a);
+    else if (s.id === 'compare') sCompare(lt, a);
+    else if (s.id === 'concl') sConcl(lt, a);
+    else if (s.id === 'end') sEnd(lt, a);
+  }
+  footer();
+}
+
+window.draw = draw;
+window.TOTAL = TOTAL;
+window.SCENES = SC;
+window.ready = document.fonts.load(`700 40px ${FONT}`).then(() => document.fonts.load(`400 40px ${FONT}`)).then(() => true);
+if (!window.__RENDER__) { draw(0); let t0 = performance.now(); (function loop() { draw(((performance.now() - t0) / 1000) % TOTAL); requestAnimationFrame(loop); })(); }
+</script>
+</body>
+</html>
