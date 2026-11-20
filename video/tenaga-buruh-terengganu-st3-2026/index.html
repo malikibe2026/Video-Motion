@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ms" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="./vendor/gsap.min.js"></script>
+<script src="./data.js"></script>
+<style>
+  :root {
+    --latar: #F4F6FA;
+    --kad: #FFFFFF;
+    --teks: #0F172A;
+    --kelabu: #5B6474;
+    --garis: #DDE3EC;
+    --aksen: #0B3D91;
+    --aksen-lembut: #E6EDF8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--latar); }
+  body { font-family: "Inter", "Noto Sans", sans-serif; color: var(--teks); }
+
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+
+  /* Bingkai tetap: kepala dan sumber */
+  #kepala { position: absolute; top: 0; left: 0; right: 0; height: 150px; padding: 0 72px;
+    display: flex; align-items: center; gap: 22px; border-bottom: 2px solid var(--garis); background: var(--kad); }
+  #kepala .jalur { width: 10px; height: 64px; background: var(--aksen); border-radius: 5px; }
+  #kepala .nama { font-size: 30px; font-weight: 700; letter-spacing: 0.04em; line-height: 1.25; }
+  #kepala .nama span { display: block; font-weight: 500; color: var(--kelabu); letter-spacing: 0.02em; }
+  #kaki { position: absolute; left: 0; right: 0; bottom: 0; height: 150px; padding: 0 72px;
+    display: flex; align-items: center; font-size: 28px; line-height: 1.35; color: var(--kelabu);
+    border-top: 2px solid var(--garis); background: var(--kad); }
+
+  /* Babak */
+  .babak { position: absolute; left: 0; right: 0; top: 150px; bottom: 150px; padding: 0 72px;
+    display: flex; flex-direction: column; justify-content: center; }
+
+  /* 1. Tajuk */
+  #b-tajuk .kecil { font-size: 40px; font-weight: 600; color: var(--kelabu); margin-bottom: 28px; }
+  #b-tajuk h1 { font-size: 112px; line-height: 1.02; font-weight: 800; letter-spacing: -0.02em; }
+  #b-tajuk h1 .negeri { display: block; color: var(--aksen); }
+  #b-tajuk .tempoh { margin-top: 48px; display: inline-block; align-self: flex-start; font-size: 46px; font-weight: 700;
+    padding: 18px 34px; border-radius: 16px; background: var(--aksen); color: #fff; }
+
+  /* 2. Konteks */
+  #b-konteks p { font-size: 64px; line-height: 1.25; font-weight: 600; }
+  #b-konteks p em { font-style: normal; color: var(--aksen); }
+
+  /* 3–5. Petunjuk utama: dua kad setiap babak */
+  .kad { background: var(--kad); border: 2px solid var(--garis); border-radius: 28px; padding: 52px 56px; }
+  .kad + .kad { margin-top: 44px; }
+  .kad .label { font-size: 44px; font-weight: 600; color: var(--kelabu); }
+  .kad .nilai { margin-top: 10px; font-size: 168px; line-height: 1; font-weight: 800; color: var(--aksen);
+    letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .kad .nilai small { font-size: 60px; font-weight: 700; letter-spacing: 0; margin-left: 12px; }
+  .kad .ubah { margin-top: 26px; font-size: 36px; line-height: 1.35; color: var(--teks); }
+  .kad .ubah b { font-weight: 700; }
+  .kad .ubah .ban { display: block; color: var(--kelabu); font-size: 32px; }
+  .anak-panah { display: inline-block; width: 1.1em; }
+
+  /* 6. Trend */
+  #b-trend h2 { font-size: 56px; line-height: 1.15; font-weight: 800; }
+  #b-trend .sub { margin-top: 14px; font-size: 34px; color: var(--kelabu); }
+  .carta { position: relative; margin-top: 70px; height: 820px; border-bottom: 3px solid var(--teks); }
+  .carta .grid { position: absolute; left: 0; right: 0; border-top: 2px dashed var(--garis); }
+  .carta .grid span { position: absolute; left: 0; top: -44px; font-size: 28px; color: var(--kelabu); }
+  .lajur { position: absolute; bottom: 0; width: 220px; }
+  .lajur .bar { position: absolute; bottom: 0; left: 0; right: 0; border-radius: 16px 16px 0 0;
+    background: #B7C2D3; transform-origin: 50% 100%; }
+  .lajur.akhir .bar { background: var(--aksen); }
+  .lajur .atas { position: absolute; left: 0; right: 0; text-align: center; font-size: 60px; font-weight: 800;
+    font-variant-numeric: tabular-nums; }
+  .lajur.akhir .atas { color: var(--aksen); }
+  .lajur .bawah { position: absolute; top: 100%; left: -20px; right: -20px; margin-top: 20px; text-align: center; }
+  .lajur .bawah b { display: block; font-size: 36px; font-weight: 700; }
+  .lajur .bawah span { display: block; margin-top: 6px; font-size: 30px; color: var(--kelabu); }
+
+  /* 7. Kesimpulan */
+  #b-kesimpulan .tanda { font-size: 40px; font-weight: 700; color: var(--aksen); letter-spacing: 0.06em; }
+  #b-kesimpulan p { margin-top: 30px; font-size: 70px; line-height: 1.2; font-weight: 700; }
+  #b-kesimpulan p em { font-style: normal; color: var(--aksen); }
+
+  /* 8. Penutup */
+  #b-penutup { align-items: flex-start; }
+  #b-penutup .jalur { width: 120px; height: 12px; border-radius: 6px; background: var(--aksen); margin-bottom: 48px; }
+  #b-penutup .nama { font-size: 60px; font-weight: 800; line-height: 1.15; }
+  #b-penutup .nama span { display: block; color: var(--aksen); }
+  #b-penutup .ket { margin-top: 40px; font-size: 38px; line-height: 1.4; color: var(--kelabu); }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="45" data-width="1080" data-height="1920">
+
+  <header id="kepala" class="clip" data-start="0" data-duration="45" data-track-index="0">
+    <div class="jalur"></div>
+    <div class="nama">JABATAN PERANGKAAN MALAYSIA<span>Negeri Terengganu</span></div>
+  </header>
+
+  <section id="b-tajuk" class="babak clip" data-start="0" data-duration="4.4" data-track-index="1">
+    <div class="kecil">Siaran Suku Tahunan</div>
+    <h1><span class="t1"></span><span class="negeri"></span></h1>
+    <div class="tempoh"></div>
+  </section>
+
+  <section id="b-konteks" class="babak clip" data-start="4" data-duration="5.4" data-track-index="2">
+    <p>Pada suku ketiga 2026, tenaga buruh Terengganu <em>berkurang sedikit</em>, tetapi bilangan penganggur <em>terus menurun</em>.</p>
+  </section>
+
+  <section id="b-k1" class="babak clip" data-start="9" data-duration="6.9" data-track-index="3"></section>
+  <section id="b-k2" class="babak clip" data-start="15.5" data-duration="6.9" data-track-index="4"></section>
+  <section id="b-k3" class="babak clip" data-start="22" data-duration="6.9" data-track-index="5"></section>
+
+  <section id="b-trend" class="babak clip" data-start="28.5" data-duration="7.9" data-track-index="6">
+    <h2>Kadar pengangguran terus menurun sejak ST1 2026</h2>
+    <div class="sub">Kadar pengangguran (%) dan bilangan penganggur, 2026</div>
+    <div class="carta"></div>
+  </section>
+
+  <section id="b-kesimpulan" class="babak clip" data-start="36" data-duration="5.4" data-track-index="7">
+    <div class="tanda">KESIMPULAN</div>
+    <p>Kadar pengangguran Terengganu turun kepada <em>2.8%</em>, paling rendah dalam tiga suku tahun 2026.</p>
+  </section>
+
+  <section id="b-penutup" class="babak clip" data-start="41" data-duration="4" data-track-index="8">
+    <div class="jalur"></div>
+    <div class="nama">Jabatan Perangkaan Malaysia<span>Negeri Terengganu</span></div>
+    <div class="ket">Statistik Tenaga Buruh, Suku Ketiga 2026<br />@StatsMalaysia</div>
+  </section>
+
+  <footer id="kaki" class="clip" data-start="0" data-duration="45" data-track-index="9"></footer>
+</div>
+
+<script>
+  const D = window.DATA, P = D.petunjuk;
+  const f1 = (n) => n.toLocaleString("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+  // ---------- Bina kandungan daripada data.js ----------
+  document.querySelector("#b-tajuk .t1").textContent = D.tajuk;
+  document.querySelector("#b-tajuk .negeri").textContent = D.negeri;
+  document.querySelector("#b-tajuk .tempoh").textContent = D.tempoh;
+  document.getElementById("kaki").textContent = D.sumber;
+
+  function kad(key) {
+    const p = P[key];
+    const beza = Math.abs(p.nilai - p.st2);
+    const turun = p.nilai < p.st2;
+    const unitBeza = p.unit === "%" ? "mata peratusan" : "ribu orang";
+    const unitNilai = p.unit === "%" ? "%" : "ribu";
+    const st2 = p.unit === "%" ? f1(p.st2) + "%" : f1(p.st2) + " ribu";
+    return `<div class="kad" data-key="${key}">
+      <div class="label">${p.label}</div>
+      <div class="nilai"><span class="angka">0.0</span><small>${unitNilai}</small></div>
+      <div class="ubah"><span class="anak-panah">${turun ? "▼" : "▲"}</span><b>${turun ? "Turun" : "Naik"} ${f1(beza)} ${unitBeza}</b>
+        <span class="ban">berbanding ${D.banding} (${st2})</span></div>
+    </div>`;
+  }
+  document.getElementById("b-k1").innerHTML = kad("tenagaBuruh") + kad("penyertaan");
+  document.getElementById("b-k2").innerHTML = kad("bekerja") + kad("luarTB");
+  document.getElementById("b-k3").innerHTML = kad("penganggur") + kad("pengangguran");
+
+  // Carta bar: paksi bermula dari sifar, skala 0–4%
+  const SKALA = 4, TINGGI = 820, LEBAR = 936;
+  const carta = document.querySelector("#b-trend .carta");
+  let html = "";
+  for (let g = 1; g <= SKALA; g++) {
+    html += `<div class="grid" style="bottom:${(g / SKALA) * TINGGI}px"><span>${g}%</span></div>`;
+  }
+  const n = D.trend.length, lebarLajur = 220, ruang = (LEBAR - n * lebarLajur) / (n + 1);
+  D.trend.forEach((r, i) => {
+    const h = (r.kadar / SKALA) * TINGGI;
+    html += `<div class="lajur ${i === n - 1 ? "akhir" : ""}" style="left:${ruang + i * (lebarLajur + ruang)}px;height:${h}px">
+      <div class="bar" style="height:${h}px"></div>
+      <div class="atas" style="bottom:${h + 16}px">${f1(r.kadar)}%</div>
+      <div class="bawah"><b>${r.suku}</b><span>${f1(r.penganggur)} ribu</span></div>
+    </div>`;
+  });
+  carta.innerHTML = html;
+
+  // ---------- Garis masa animasi (setiap kedudukan dalam saat mutlak) ----------
+  window.__timelines = window.__timelines || {};
+  const tl = gsap.timeline({ paused: true });
+  const masuk = { opacity: 0, y: 40 }, siap = { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" };
+  const keluar = (sel, t) => tl.to(sel, { opacity: 0, duration: 0.4, ease: "power1.in" }, t);
+
+  // Bingkai tetap
+  tl.fromTo("#kepala, #kaki", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0);
+
+  // 1. Tajuk
+  tl.fromTo("#b-tajuk .kecil", masuk, siap, 0.2);
+  tl.fromTo("#b-tajuk h1", masuk, siap, 0.4);
+  tl.fromTo("#b-tajuk .tempoh", masuk, siap, 0.8);
+  keluar("#b-tajuk", 4.0);
+
+  // 2. Konteks
+  tl.fromTo("#b-konteks p", masuk, { ...siap, duration: 0.8 }, 4.3);
+  keluar("#b-konteks", 9.0);
+
+  // 3–5. Kad petunjuk: masuk, nombor mengira naik, perubahan muncul
+  function babakKad(id, t0) {
+    const babak = document.getElementById(id);
+    const kads = babak.querySelectorAll(".kad");
+    kads.forEach((el, i) => {
+      const t = t0 + 0.2 + i * 1.2;
+      const p = P[el.dataset.key];
+      const angka = el.querySelector(".angka");
+      const kiraan = { v: 0 };
+      tl.fromTo(el, masuk, siap, t);
+      tl.fromTo(kiraan, { v: 0 }, { v: p.nilai, duration: 1.4, ease: "power2.out",
+        onUpdate: () => { angka.textContent = f1(kiraan.v); } }, t + 0.2);
+      tl.fromTo(el.querySelector(".ubah"), { opacity: 0 }, { opacity: 1, duration: 0.5 }, t + 1.4);
+    });
+    keluar(babak, t0 + 6.5);
+  }
+  babakKad("b-k1", 9.0);
+  babakKad("b-k2", 15.5);
+  babakKad("b-k3", 22.0);
+
+  // 6. Trend
+  tl.fromTo("#b-trend h2", masuk, siap, 28.7);
+  tl.fromTo("#b-trend .sub", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 29.1);
+  tl.fromTo("#b-trend .grid, #b-trend .lajur .bawah", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 29.3);
+  document.querySelectorAll("#b-trend .lajur").forEach((el, i) => {
+    const t = 29.8 + i * 0.9;
+    tl.fromTo(el.querySelector(".bar"), { scaleY: 0 }, { scaleY: 1, duration: 0.9, ease: "power2.out" }, t);
+    tl.fromTo(el.querySelector(".atas"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, t + 0.6);
+  });
+  keluar("#b-trend", 36.0);
+
+  // 7. Kesimpulan
+  tl.fromTo("#b-kesimpulan .tanda", masuk, siap, 36.3);
+  tl.fromTo("#b-kesimpulan p", masuk, { ...siap, duration: 0.8 }, 36.6);
+  keluar("#b-kesimpulan", 41.0);
+
+  // 8. Penutup
+  tl.fromTo("#b-penutup .jalur", { scaleX: 0, transformOrigin: "0 50%" }, { scaleX: 1, duration: 0.6 }, 41.2);
+  tl.fromTo("#b-penutup .nama", masuk, siap, 41.4);
+  tl.fromTo("#b-penutup .ket", masuk, siap, 41.8);
+  tl.to({}, { duration: 0.01 }, 44.99);
+
+  window.__timelines["main"] = tl;
+</script>
+</body>
+</html>
