@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="ms" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="./vendor/gsap.min.js"></script>
+<script src="./data.js"></script>
+<style>
+  :root {
+    --biru: #0B3D91;
+    --putih: #FFFFFF;
+    --kuning: #FFC72C;
+    --hitam: #0A0F1E;
+    --kelabu: #5B6474;
+    --kelabu-muda: #C9D1DE;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--putih); }
+  body { font-family: "Inter", sans-serif; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+
+  .babak { position: absolute; inset: 0; overflow: hidden; }
+  .lapis { position: absolute; inset: 0; }
+  .angka { font-family: "League Gothic", sans-serif; font-weight: 400; line-height: 1; letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .kata { font-weight: 900; letter-spacing: -0.03em; line-height: 0.95; text-transform: uppercase; }
+  .kecil { font-weight: 700; font-size: 40px; line-height: 1.3; letter-spacing: 0; }
+  .baris { position: absolute; left: 72px; right: 72px; }
+  .w { display: inline-block; }
+
+  /* Odometer */
+  .odo { display: inline-flex; }
+  .odo .c { display: inline-block; height: 0.8em; line-height: 0.8em; overflow: hidden; }
+  .odo .s { display: flex; flex-direction: column; }
+  .odo .s span { display: block; height: 0.8em; line-height: 0.8em; }
+
+  /* S1 */
+  #s1 { background: var(--biru); z-index: 10; }
+  #s1 .lbl { top: 250px; color: var(--putih); }
+  #s1 .lbl .a { font-size: 64px; }
+  #s1 .lbl .b { margin-top: 18px; font-size: 44px; font-weight: 700; color: var(--kuning); }
+  #s1 .potong { position: absolute; left: 0; right: 0; top: 560px; height: 760px; display: flex; justify-content: center;
+    align-items: center; color: var(--kuning); font-size: 700px; }
+  #s1 .atas { clip-path: inset(0 0 50% 0); }
+  #s1 .bawah { clip-path: inset(50% 0 0 0); }
+
+  /* S2 */
+  #s2 { background: var(--putih); z-index: 5; color: var(--hitam); }
+  #s2 .t { top: 560px; font-size: 230px; }
+  #s2 .t div { display: block; }
+  #s2 .sub { top: 1130px; font-size: 52px; font-weight: 700; color: var(--kelabu); }
+
+  /* S3 */
+  #s3 { z-index: 20; }
+  #s3 .latar { background: var(--kuning); }
+  #s3 .isi { color: var(--hitam); }
+  #s3 .lbl { top: 250px; font-size: 140px; }
+  #s3 .nom { top: 430px; font-size: 640px; }
+  #s3 .ribu { top: 1120px; font-size: 130px; }
+  #s3 .tempoh { top: 1265px; height: 1.3em; overflow: hidden; font-size: 48px; }
+  #s3 .tempoh .s { display: flex; flex-direction: column; }
+  #s3 .tempoh .s span { display: block; height: 1.3em; }
+  #s3 .ubah { top: 1345px; font-size: 52px; font-weight: 800; }
+
+  /* S4 */
+  #s4 { z-index: 25; }
+  #s4 .latar { background: var(--biru); }
+  #s4 .isi { color: var(--putih); }
+  #s4 .lbl { top: 300px; font-size: 96px; color: var(--kuning); }
+  #s4 .nom { top: 460px; font-size: 620px; }
+  #s4 .t { top: 1100px; font-size: 128px; }
+  #s4 .titik { position: relative; display: inline-block; }
+  #s4 .bulat { position: absolute; left: 50%; top: 86%; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; background: var(--putih); }
+
+  /* S5 */
+  #s5 { background: var(--putih); z-index: 30; color: var(--hitam); }
+  #s5 .lbl { top: 220px; color: var(--kelabu); font-size: 38px; }
+  #s5 .grid { position: absolute; left: 42px; top: 300px; width: 997px; height: 622px; display: grid;
+    grid-template-columns: repeat(40, 22px); grid-auto-rows: 22px; gap: 3px; }
+  #s5 .grid i { display: block; background: #E3E8F0; border-radius: 3px; }
+  #s5 .grid i.isi { background: var(--biru); }
+  #s5 .nom { top: 950px; font-size: 330px; color: var(--biru); }
+  #s5 .t { top: 1270px; font-size: 76px; }
+  #s5 .banding { top: 1440px; font-size: 40px; color: var(--kelabu); }
+
+  /* S6 */
+  #s6 { background: var(--hitam); z-index: 35; }
+  #s6 .kawasan { position: absolute; left: 0; right: 0; top: 180px; height: 1540px; }
+  #s6 .bekerja { position: absolute; left: 0; right: 0; bottom: 0; background: var(--biru); transform-origin: 50% 100%; }
+  #s6 .jalur { position: absolute; left: 0; right: 0; top: 0; background: var(--kuning); transform-origin: 50% 0; }
+  #s6 .isi { color: var(--putih); }
+  #s6 .tanda { top: 250px; font-size: 50px; font-weight: 800; color: var(--kuning); }
+  #s6 .nom { top: 520px; font-size: 560px; }
+  #s6 .t { top: 1090px; font-size: 128px; }
+  #s6 .jumlah { top: 1370px; font-size: 42px; color: rgba(255,255,255,0.8); }
+  #s6 .banjir { position: absolute; inset: 0; background: var(--biru); }
+
+  /* S7 */
+  #s7 { background: var(--biru); z-index: 40; color: var(--putih); }
+  #s7 .lbl { top: 250px; font-size: 118px; }
+  #s7 .nom { top: 520px; font-size: 600px; }
+  #s7 .ribu { top: 1150px; font-size: 110px; }
+  #s7 .ubah { top: 1290px; font-size: 52px; font-weight: 800; color: var(--putih); }
+
+  /* S8 */
+  #s8 { background: var(--putih); z-index: 45; color: var(--hitam); }
+  #s8 .t { top: 220px; font-size: 136px; }
+  #s8 .sub { top: 495px; font-size: 40px; color: var(--kelabu); }
+  #s8 .paksi { position: absolute; left: 60px; right: 60px; top: 1298px; height: 4px; background: var(--hitam); }
+  #s8 .bar { position: absolute; width: 260px; background: var(--kelabu-muda); transform-origin: 50% 100%; }
+  #s8 .bar.akhir { background: var(--biru); }
+  #s8 .nilai { position: absolute; width: 260px; text-align: center; font-size: 170px; }
+  #s8 .nilai.akhir { color: var(--biru); }
+  #s8 .suku { position: absolute; width: 300px; text-align: center; top: 1322px; }
+  #s8 .suku b { display: block; font-size: 52px; font-weight: 900; }
+  #s8 .suku span { display: block; font-size: 34px; font-weight: 700; color: var(--kelabu); }
+  #s8 .banjir { position: absolute; inset: 0; background: var(--biru); }
+
+  /* S9 */
+  #s9 { background: var(--biru); z-index: 50; color: var(--putih); }
+  #s9 .nom { top: 330px; font-size: 600px; color: var(--kuning); }
+  #s9 .t { top: 960px; font-size: 118px; }
+
+  /* S10 */
+  #s10 { background: var(--putih); z-index: 55; color: var(--hitam); }
+  #s10 .jalur { position: absolute; left: 72px; top: 520px; width: 220px; height: 22px; background: var(--biru); transform-origin: 0 50%; }
+  #s10 .nama { top: 590px; font-size: 92px; }
+  #s10 .nama .neg { color: var(--biru); }
+  #s10 .ket { top: 1080px; font-size: 44px; color: var(--kelabu); font-weight: 700; }
+
+  /* Garis sumber */
+  #sumber { position: absolute; left: 72px; right: 72px; top: 1790px; z-index: 100; font-size: 30px; font-weight: 600;
+    line-height: 1.35; color: rgba(255,255,255,0.75); }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="41" data-width="1080" data-height="1920">
+
+  <!-- S1: 2.8% hentam, terbelah -->
+  <section id="s1" class="babak clip" data-start="0" data-duration="3.1" data-track-index="1" data-track-kind="graphics">
+    <div class="baris lbl"><div class="kata a">Kadar pengangguran</div><div class="b">Terengganu · Suku Ketiga 2026</div></div>
+    <div class="potong angka atas" data-layout-allow-overlap><span class="v"></span></div>
+    <div class="potong angka bawah" data-layout-allow-overlap><span class="v"></span></div>
+  </section>
+
+  <!-- S2: Siapa mereka? -->
+  <section id="s2" class="babak clip" data-start="2.6" data-duration="2.8" data-track-index="2" data-track-kind="graphics">
+    <div class="baris kata t" data-layout-allow-overlap><div class="w1">Siapa</div><div class="w2">mereka?</div></div>
+    <div class="baris sub">Di sebalik angka 2.8% itu</div>
+  </section>
+
+  <!-- S3: Penganggur, odometer ST2 -> ST3 -->
+  <section id="s3" class="babak clip" data-start="4.8" data-duration="5.5" data-track-index="3" data-track-kind="graphics">
+    <div class="lapis latar"></div>
+    <div class="lapis isi">
+      <div class="baris kata lbl">Penganggur</div>
+      <div class="baris angka nom"></div>
+      <div class="baris kata ribu">ribu orang</div>
+      <div class="baris kata tempoh"><div class="s"><span></span><span></span></div></div>
+      <div class="baris ubah"></div>
+    </div>
+  </section>
+
+  <!-- S4: daripada 510.4 ribu tenaga buruh -->
+  <section id="s4" class="babak clip" data-start="9.95" data-duration="4.35" data-track-index="4" data-track-kind="graphics">
+    <div class="lapis latar"></div>
+    <div class="lapis isi">
+      <div class="baris kata lbl">Daripada</div>
+      <div class="baris angka nom"><span class="ip"></span><span class="titik">.<i class="bulat"></i></span><span class="dp"></span></div>
+      <div class="baris kata t">ribu<br />tenaga buruh</div>
+    </div>
+  </section>
+
+  <!-- S5: grid 1000 petak, 60.9% menyertai -->
+  <section id="s5" data-layout-allow-overlap class="babak clip" data-start="14.1" data-duration="4.9" data-track-index="5" data-track-kind="graphics">
+    <div class="baris kecil lbl">1 petak = 0.1% penduduk umur bekerja</div>
+    <div class="grid"></div>
+    <div class="baris angka nom"></div>
+    <div class="baris kata t">menyertai<br />tenaga buruh</div>
+    <div class="baris kecil banding"></div>
+  </section>
+
+  <!-- S6: jalur bekerja + penganggur -->
+  <section id="s6" class="babak clip" data-start="19" data-duration="6.4" data-track-index="6" data-track-kind="graphics">
+    <div class="kawasan"><div class="bekerja"></div><div class="jalur"></div></div>
+    <div class="lapis isi">
+      <div class="baris tanda"></div>
+      <div class="baris angka nom"></div>
+      <div class="baris kata t">ribu<br />bekerja</div>
+      <div class="baris kecil jumlah"></div>
+    </div>
+    <div class="banjir"></div>
+  </section>
+
+  <!-- S7: di luar tenaga buruh, odometer -->
+  <section id="s7" class="babak clip" data-start="25.3" data-duration="3.9" data-track-index="7" data-track-kind="graphics">
+    <div class="baris kata lbl">Di luar<br />tenaga buruh</div>
+    <div class="baris angka nom"></div>
+    <div class="baris kata ribu">ribu orang</div>
+    <div class="baris ubah"></div>
+  </section>
+
+  <!-- S8: tangga ST1 -> ST3 -->
+  <section id="s8" class="babak clip" data-start="28.95" data-duration="6" data-track-index="8" data-track-kind="graphics">
+    <div class="baris kata t">Terus<br />menurun</div>
+    <div class="baris kecil sub">Kadar pengangguran Terengganu, 2026</div>
+    <div class="carta"></div>
+    <div class="paksi"></div>
+    <div class="banjir"></div>
+  </section>
+
+  <!-- S9: kesimpulan -->
+  <section id="s9" data-layout-allow-overlap class="babak clip" data-start="34.7" data-duration="3.75" data-track-index="9" data-track-kind="graphics">
+    <div class="baris angka nom"></div>
+    <div class="baris kata t"></div>
+  </section>
+
+  <!-- S10: penutup -->
+  <section id="s10" class="babak clip" data-start="38" data-duration="3" data-track-index="10" data-track-kind="graphics">
+    <div class="jalur"></div>
+    <div class="baris kata nama" data-layout-allow-overlap><span class="w">Jabatan</span> <span class="w">Perangkaan</span> <span class="w">Malaysia</span><br /><span class="w neg">Negeri</span> <span class="w neg">Terengganu</span></div>
+    <div class="baris ket">Statistik Tenaga Buruh · Suku Ketiga 2026<br />@StatsMalaysia</div>
+  </section>
+
+  <div id="sumber" class="clip" data-start="0" data-duration="41" data-track-index="11" data-track-kind="graphics"></div>
+</div>
+
+<script>
+(function () {
+  const D = window.DATA, P = D.petunjuk;
+  const f1 = (n) => n.toLocaleString("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const BEAT = 0.5;
+
+  // Odometer: setiap digit yang berubah menjadi jalur yang berguling dari nilai lama ke nilai baru.
+  function odometer(el, dari, ke) {
+    const a = f1(dari), b = f1(ke);
+    el.innerHTML = '<span class="odo">' + [...b].map((ch, i) => {
+      const c0 = a[i];
+      if (c0 === ch || !/\d/.test(ch)) return `<span class="c"><span class="s"><span>${ch}</span></span></span>`;
+      const x = +c0, y = +ch, step = y > x ? 1 : -1, seq = [];
+      for (let d = x; d !== y + step; d += step) seq.push(d);
+      return `<span class="c"><span class="s roll" data-n="${seq.length - 1}">${seq.map(d => `<span>${d}</span>`).join("")}</span></span>`;
+    }).join("") + "</span>";
+    return $$(".roll", el);
+  }
+  // Pecah teks kepada perkataan (untuk masuk perkataan demi perkataan)
+  function pecah(el, teks) { el.innerHTML = teks.split(" ").map(w => `<span class="w">${w}</span>`).join(" "); return $$(".w", el); }
+
+  function bina() {
+    // ---------- Kandungan dari data.js ----------
+    $$("#s1 .v").forEach(v => v.textContent = f1(P.pengangguran.nilai) + "%");
+
+    const rollS3 = odometer($("#s3 .nom"), P.penganggur.st2, P.penganggur.nilai);
+    const tempohS3 = $$("#s3 .tempoh span");
+    tempohS3[0].textContent = D.banding; tempohS3[1].textContent = D.tempohPendek;
+    $("#s3 .ubah").textContent = `▼ Turun ${f1(P.penganggur.st2 - P.penganggur.nilai)} ribu dari ${D.banding}`;
+
+    const ip4 = $("#s4 .ip"), dp4 = $("#s4 .dp");
+    const tulis4 = (v) => { const [a, b] = f1(v).split("."); ip4.textContent = a; dp4.textContent = b; };
+    tulis4(P.tenagaBuruh.nilai);
+
+    // Grid 1000 petak: 609 diisi = 60.9%
+    const grid = $("#s5 .grid");
+    grid.innerHTML = "<i></i>".repeat(1000);
+    const petak = $$("#s5 .grid i");
+    const isi = Math.round(P.penyertaan.nilai * 10);
+    $("#s5 .nom").textContent = f1(P.penyertaan.nilai) + "%";
+    $("#s5 .banding").textContent = `${D.banding}: ${f1(P.penyertaan.st2)}% · turun ${f1(P.penyertaan.st2 - P.penyertaan.nilai)} mata peratusan`;
+
+    // Jalur bekerja / penganggur (kawasan 1540 px)
+    const KAW = 1540, nisbahP = P.penganggur.nilai / P.tenagaBuruh.nilai;
+    const hJ = KAW * nisbahP;
+    $("#s6 .jalur").style.height = hJ + "px";
+    $("#s6 .bekerja").style.height = (KAW - hJ) + "px";
+    $("#s6 .tanda").textContent = `▲ ${f1(P.penganggur.nilai)} ribu penganggur (${f1(P.pengangguran.nilai)}%)`;
+    $("#s6 .nom").textContent = f1(P.bekerja.nilai);
+    $("#s6 .jumlah").textContent = `Jumlah tenaga buruh ${f1(P.tenagaBuruh.nilai)} ribu · ${D.tempohPendek}`;
+
+    const rollS7 = odometer($("#s7 .nom"), P.luarTB.st2, P.luarTB.nilai);
+    $("#s7 .ubah").textContent = `▲ Naik ${f1(P.luarTB.nilai - P.luarTB.st2)} ribu berbanding ${D.banding} (${f1(P.luarTB.st2)} ribu)`;
+
+    // Tangga: bar dari paksi sifar, skala 0–3.5%
+    const ASAS = 1300, TINGGI = 560, SKALA = 3.5, LB = 260, KIRI = 90, JARAK = 60;
+    let carta = "";
+    D.trend.forEach((r, i) => {
+      const h = (r.kadar / SKALA) * TINGGI, x = KIRI + i * (LB + JARAK), akhir = i === D.trend.length - 1 ? " akhir" : "";
+      carta += `<div class="bar${akhir}" style="left:${x}px;top:${ASAS - h}px;height:${h}px"></div>`;
+      carta += `<div class="nilai angka${akhir}" style="left:${x}px;top:${ASAS - h - 190}px">${f1(r.kadar)}%</div>`;
+      carta += `<div class="suku" style="left:${x - 20}px"><b>${r.suku.split(" ")[0]}</b><span>${f1(r.penganggur)} ribu</span></div>`;
+    });
+    $("#s8 .carta").innerHTML = carta;
+    const akhirT = D.trend[D.trend.length - 1], hA = (akhirT.kadar / SKALA) * TINGGI, xA = KIRI + (D.trend.length - 1) * (LB + JARAK);
+
+    $("#s9 .nom").textContent = f1(P.pengangguran.nilai) + "%";
+    const kataS9 = pecah($("#s9 .t"), "Terendah setakat ini pada 2026");
+
+    $("#sumber").textContent = D.sumber;
+
+
+    // ---------- Garis masa ----------
+    const tl = gsap.timeline({ paused: true });
+    const hentam = (el, t, s = 1.3) => tl.fromTo(el, { scale: s, filter: "blur(14px)", opacity: 0 },
+      { scale: 1, filter: "blur(0px)", opacity: 1, duration: 0.3, ease: "expo.out" }, t);
+    const kabur = (el, t, d = 0.18) => tl.fromTo(el, { filter: "blur(8px)", opacity: 0 },
+      { filter: "blur(0px)", opacity: 1, duration: d, ease: "power2.out" }, t);
+    const warnaSumber = (c, t) => tl.set("#sumber", { color: c }, t);
+
+    // S1 (frame 0 sudah menunjukkan 2.8%)
+    tl.fromTo("#s1 .potong", { scale: 1.08 }, { scale: 1, duration: 0.45, ease: "expo.out" }, 0);
+    $$("#s1 .lbl .a, #s1 .lbl .b").forEach((el, i) => kabur(el, 0.45 + i * 0.12));
+    tl.to("#s1 .lbl", { opacity: 0, duration: 0.15 }, 2.4);
+    tl.set("#s1 .lbl", { opacity: 0 }, 2.56);
+    tl.to("#s1 .atas", { x: -1300, filter: "blur(20px)", duration: 0.4, ease: "power3.in" }, 2.55);
+    tl.to("#s1 .bawah", { x: 1300, filter: "blur(20px)", duration: 0.4, ease: "power3.in" }, 2.55);
+    tl.to("#s1", { backgroundColor: "rgba(11,61,145,0)", duration: 0.25, ease: "power2.in" }, 2.7);
+    warnaSumber("rgba(255,255,255,0.75)", 0);
+
+    // S2
+    warnaSumber("#5B6474", 2.85);
+    hentam("#s2 .w1", 3.0);
+    hentam("#s2 .w2", 3.5);
+    kabur("#s2 .sub", 4.0, 0.2);
+
+    // S3: banjir kuning dari bawah
+    tl.fromTo("#s3 .latar", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 0.4, ease: "power2.inOut" }, 4.8);
+    warnaSumber("rgba(10,15,30,0.7)", 5.0);
+    kabur("#s3 .lbl", 5.15, 0.2);
+    hentam("#s3 .nom", 5.4);
+    kabur("#s3 .ribu", 5.75);
+    kabur("#s3 .tempoh", 5.9);
+    rollS3.forEach(s => tl.fromTo(s, { yPercent: 0 }, { yPercent: -100 * s.dataset.n / (+s.dataset.n + 1), duration: 0.8, ease: "power2.inOut" }, 6.6));
+    tl.fromTo("#s3 .tempoh .s", { yPercent: 0 }, { yPercent: -50, duration: 0.3, ease: "power3.inOut" }, 6.9);
+    kabur("#s3 .ubah", 7.6, 0.2);
+    // whip ke kiri
+    tl.to("#s3 .isi", { x: -1100, filter: "blur(20px)", duration: 0.28, ease: "power3.in" }, 9.95);
+
+    // S4: masuk dari kanan (whip)
+    tl.fromTo("#s4", { x: 1080, filter: "blur(20px)" }, { x: 0, filter: "blur(0px)", duration: 0.3, ease: "expo.out" }, 9.95);
+    warnaSumber("rgba(255,255,255,0.75)", 10.1);
+    kabur("#s4 .lbl", 10.35, 0.2);
+    tl.set(".bulat", { opacity: 0 }, 0);
+    const kira = { v: 0 };
+    tl.fromTo(kira, { v: 0 }, { v: P.tenagaBuruh.nilai, duration: 1.4, ease: "power3.out",
+      onUpdate: () => tulis4(kira.v) }, 10.5);
+    tl.fromTo("#s4 .nom", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 10.5);
+    kabur("#s4 .t", 11.5, 0.2);
+    // zum masuk ke titik perpuluhan
+    tl.set(".bulat", { opacity: 1 }, 13.55);
+    tl.to("#s4 .lbl, #s4 .t, #s4 .ip, #s4 .dp", { opacity: 0, duration: 0.3, ease: "power2.in" }, 13.65);
+    tl.fromTo(".bulat", { scale: 1 }, { scale: 140, duration: 0.5, ease: "power3.in" }, 13.6);
+
+    // S5: grid diisi
+    warnaSumber("#5B6474", 14.1);
+    kabur("#s5 .lbl", 14.25, 0.2);
+    tl.fromTo(grid, { opacity: 0 }, { opacity: 1, duration: 0.2 }, 14.2);
+    const kiraPetak = { n: 0 };
+    tl.fromTo(kiraPetak, { n: 0 }, { n: isi, duration: 2.0, ease: "power1.inOut",
+      onUpdate: () => { const n = Math.round(kiraPetak.n); petak.forEach((p, i) => p.classList.toggle("isi", i < n)); } }, 14.5);
+    hentam("#s5 .nom", 16.5, 1.25);
+    kabur("#s5 .t", 17.0, 0.2);
+    kabur("#s5 .banding", 17.4, 0.2);
+
+    // S6: potong keras pada rentak; jalur naik
+    warnaSumber("rgba(255,255,255,0.6)", 19.0);
+    tl.fromTo("#s6 .bekerja", { scaleY: 0 }, { scaleY: 1, duration: 0.9, ease: "expo.out" }, 19.15);
+    tl.fromTo("#s6 .jalur", { scaleY: 0 }, { scaleY: 1, duration: 0.35, ease: "back.out(2)" }, 20.0);
+    hentam("#s6 .nom", 20.5);
+    kabur("#s6 .t", 20.9, 0.2);
+    kabur("#s6 .tanda", 21.5, 0.2);
+    kabur("#s6 .jumlah", 22.0, 0.2);
+    // biru membanjiri skrin menjadi dunia seterusnya
+    tl.set("#s6 .banjir, #s8 .banjir", { opacity: 0 }, 0);
+    tl.set("#s6 .banjir", { opacity: 1 }, 24.84);
+    tl.set("#s8 .banjir", { opacity: 1 }, 34.24);
+    tl.to("#s6 .isi", { opacity: 0, duration: 0.2 }, 24.75);
+    tl.fromTo("#s6 .banjir", { clipPath: `inset(${180 + hJ}px 0 ${1920 - 1720}px 0)` },
+      { clipPath: "inset(0px 0 0px 0)", duration: 0.45, ease: "power2.inOut" }, 24.85);
+
+    // S7: odometer luar tenaga buruh
+    warnaSumber("rgba(255,255,255,0.75)", 25.3);
+    kabur("#s7 .lbl", 25.4, 0.2);
+    hentam("#s7 .nom", 25.7);
+    kabur("#s7 .ribu", 26.0);
+    rollS7.forEach(s => tl.fromTo(s, { yPercent: 0 }, { yPercent: -100 * s.dataset.n / (+s.dataset.n + 1), duration: 0.9, ease: "power2.inOut" }, 26.4));
+    kabur("#s7 .ubah", 27.4, 0.2);
+    // whip ke atas
+    tl.to("#s7", { y: -1920, filter: "blur(20px)", duration: 0.3, ease: "power3.in" }, 28.95);
+
+    // S8: tangga
+    tl.fromTo("#s8", { y: 1920, filter: "blur(20px)" }, { y: 0, filter: "blur(0px)", duration: 0.3, ease: "expo.out" }, 28.95);
+    warnaSumber("#5B6474", 29.1);
+    hentam("#s8 .t", 29.35, 1.2);
+    kabur("#s8 .sub", 29.7, 0.2);
+    $$("#s8 .bar").forEach((b, i) => {
+      const t = 30.0 + i * BEAT;
+      tl.fromTo(b, { scaleY: 0 }, { scaleY: 1, duration: 0.45, ease: "expo.out" }, t);
+      hentam($$("#s8 .nilai")[i], t + 0.25, 1.4);
+      kabur($$("#s8 .suku")[i], t + 0.1, 0.2);
+    });
+    // bar ST3 membesar menjadi dunia biru
+    tl.fromTo("#s8 .banjir", { clipPath: `inset(${ASAS - hA}px ${1080 - xA - LB}px ${1920 - ASAS}px ${xA}px)` },
+      { clipPath: "inset(0px 0px 0px 0px)", duration: 0.5, ease: "power2.inOut" }, 34.25);
+
+    // S9: kesimpulan
+    warnaSumber("rgba(255,255,255,0.75)", 34.7);
+    hentam("#s9 .nom", 34.9);
+    kataS9.forEach((w, i) => kabur(w, 35.5 + i * 0.09, 0.15));
+
+    // S10: penutup (lap putih dari kiri)
+    tl.fromTo("#s10", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.4, ease: "power2.inOut" }, 38.0);
+    warnaSumber("#5B6474", 38.2);
+    tl.fromTo("#s10 .jalur", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "expo.out" }, 38.35);
+    $$("#s10 .nama .w").forEach((w, i) => tl.fromTo(w, { color: "#D5DAE3" }, { color: i > 2 ? "#0B3D91" : "#0A0F1E", duration: 0.2 }, 38.5 + i * 0.09));
+    kabur("#s10 .ket", 39.1, 0.2);
+    tl.to({}, { duration: 0.01 }, 40.99);
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["main"] = tl;
+  }
+
+  document.fonts.ready.then(bina);
+})();
+</script>
+</body>
+</html>
