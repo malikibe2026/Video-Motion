@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="../ui.css">
+  <link rel="stylesheet" href="../retro.css">
+  <script src="../icons.js"></script>
+  <script src="../motion.js"></script>
+  <script src="../mouth.js"></script>
+  <script src="../man.js"></script>
+  <style>
+    body { background: var(--vermilion); }
+    /* Red poster: mustard sunburst behind, halftone gradient, ink border. */
+    .poster { position: absolute; inset: -200px; background: #d63c25; }
+    .burst { position: absolute; left: 50%; top: 50%; width: 3000px; height: 3000px; margin: -1500px 0 0 -1500px;
+      background: repeating-conic-gradient(from 0deg, rgb(224 165 38 / 0.32) 0 7deg, transparent 7deg 15deg);
+      -webkit-mask-image: radial-gradient(closest-side, #000 20%, transparent 75%); }
+    .dots { position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgb(27 23 18 / 0.35) 0 3px, transparent 3.6px); background-size: 14px 14px;
+      -webkit-mask-image: linear-gradient(0deg, #000, transparent 55%); }
+    .border { position: absolute; inset: 26px; border: 8px solid var(--ink); outline: 3px solid var(--cream); outline-offset: -20px; }
+
+    /* Camera: orbit to the right around him, landing on a three-quarter close-up. */
+    .rig { perspective: 1600px; }
+    .cam-layer { animation: orbit 2s cubic-bezier(0.25, 0.1, 0.25, 1) both; transform-origin: 30% 50%; transform-style: preserve-3d; }
+    @keyframes orbit {
+      from { transform: translateX(170px) rotateY(-26deg) scale(1.0); }
+      to { transform: translateX(0) rotateY(0deg) scale(1.08); }
+    }
+    .bgpar { position: absolute; inset: 0; animation: par 2s cubic-bezier(0.25, 0.1, 0.25, 1) both; }
+    @keyframes par { from { transform: translateX(-180px); } to { transform: translateX(60px); } }
+    .face34 { position: absolute; inset: 0; transform: rotateY(16deg); transform-origin: 32% 50%; }
+    .man { left: 260px; top: 60px; transform: scale(1.75); transform-origin: 50% 0%; }
+
+    .ko3 { position: absolute; right: 120px; top: 120px; font-size: 270px; color: var(--mustard); background: var(--ink); padding: 18px 34px 34px; }
+    .shotwrap { position: absolute; right: 110px; top: 580px; width: 600px; height: 300px; }
+    .shotwrap svg { position: absolute; inset: -20px; width: calc(100% + 40px); height: calc(100% + 40px); overflow: visible; }
+    .shot { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; font-family: var(--en); font-size: 170px; color: var(--cream); }
+    .frame { fill: none; stroke: var(--ink); stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
+    .frame.cream { stroke: var(--cream); stroke-width: 7; }
+  </style>
+</head>
+<body>
+  <div class="rig">
+    <div class="bgpar">
+      <div class="poster"><div class="burst"></div><div class="dots"></div></div>
+    </div>
+    <div class="cam-layer">
+      <div class="face34" data-world>
+        <div class="man" id="man"></div>
+      </div>
+    </div>
+  </div>
+  <div class="halftone" data-overlap-ok></div>
+  <div class="border" data-overlap-ok></div>
+  <div class="vignette-print" data-overlap-ok></div>
+  <header class="hud" style="inset:0">
+    <h1 class="ko ko3 mis-ver m" style="--in:rise; --t:-0.25s; --in-dur:0.5s">구도</h1>
+    <div class="shotwrap">
+      <!-- Hand-drawn viewfinder frame: wobbly rectangle and corner ticks -->
+      <svg viewBox="0 0 660 340" preserveAspectRatio="none">
+        <path class="frame cream stroke m" pathLength="1" style="--in:draw; --t:0.15s; --in-dur:0.7s; --in-ease:var(--ease-inout)"
+          d="M24 30 C180 18 470 26 636 22 C642 120 630 230 640 316 C470 324 190 318 22 322 C28 220 18 120 24 30 Z"
+          data-sfx="draw" data-sfx-intent="draw" data-sfx-vol="0.5"/>
+        <path class="frame stroke m" pathLength="1" style="--in:draw; --t:0.75s; --in-dur:0.3s"
+          d="M-6 70 L-6 -6 L72 -8 M590 -6 L666 -4 L664 72 M666 270 L668 346 L590 344 M72 348 L-4 346 L-8 270"/>
+      </svg>
+      <p class="shot mis-ink m" style="--in:fade; --t:0.35s; --in-dur:0.4s">SHOT</p>
+    </div>
+  </header>
+  <script>
+    // Right hand (screen right) up beside the face, counting one, two, three. Head tilts.
+    MAN.pose(document.getElementById('man'), {
+      uR:    [[0, -12], [0.3, -68], [2, -72]],
+      fR:    [[0, -40], [0.3, -112], [2, -110]],
+      handR: [[0, 'rest'], [0.28, 'one'], [0.72, 'two'], [1.12, 'three']],
+      handRS:[[0, 1], [0.3, 1.5], [2, 1.5]],
+      headR: [[0, 0], [0.5, 6], [1.1, 9], [2, 8]],
+      look:  [[0, 2], [0.8, 3]],
+      brow:  [[0, 0], [0.7, -3], [1.2, -5], [2, -3]],
+    }, 4);
+  </script>
+</body>
+</html>

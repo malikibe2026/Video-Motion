@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="../ui.css">
+  <link rel="stylesheet" href="../retro.css">
+  <script src="../icons.js"></script>
+  <script src="../motion.js"></script>
+  <script src="../mouth.js"></script>
+  <script src="../man.js"></script>
+  <style>
+    body { background: #120f0c; }
+    .studio {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(38% 46% at 50% 44%, rgb(239 227 200 / 0.16), transparent 70%),
+        radial-gradient(30% 60% at 22% 55%, rgb(242 163 58 / 0.22), transparent 70%),
+        radial-gradient(30% 60% at 78% 55%, rgb(47 179 168 / 0.2), transparent 70%),
+        linear-gradient(#17130f 0 66%, #0d0b09 66% 100%);
+    }
+    .floor { position: absolute; left: 0; right: 0; top: 66%; bottom: 0;
+      background: radial-gradient(50% 80% at 50% 10%, rgb(239 227 200 / 0.08), transparent 70%); }
+    /* PavoTube lights: amber left, teal right */
+    .tube { position: absolute; top: 160px; width: 26px; height: 560px; border-radius: 13px; }
+    .tube.amb { left: 490px; background: linear-gradient(#ffd79a, #f2a33a); box-shadow: 0 0 40px 10px rgb(242 163 58 / 0.55), 0 0 140px 40px rgb(242 163 58 / 0.25); }
+    .tube.teal { left: 1240px; background: linear-gradient(#a9f0e8, #2fb3a8); box-shadow: 0 0 40px 10px rgb(47 179 168 / 0.55), 0 0 140px 40px rgb(47 179 168 / 0.25); }
+    .stand { position: absolute; top: 720px; width: 6px; height: 200px; background: #2a241d; }
+    .stand.a { left: 500px; } .stand.b { left: 1250px; }
+
+    /* Camera: wide low angle, pushing in. Ease-out push. */
+    .cam-layer { animation: push 2s cubic-bezier(0.3, 0.1, 0.2, 1) both; transform-origin: 44% 46%; }
+    @keyframes push { from { transform: scale(1); } to { transform: scale(1.16); } }
+    .tilt { position: absolute; inset: 0; transform: rotateX(6deg); transform-origin: 50% 100%; }
+    .man { left: 570px; top: 150px; transform: scale(0.9); transform-origin: 50% 100%; }
+    .floor-shadow { left: 610px; top: 920px; }
+
+    .ko-v { position: absolute; left: 120px; top: 110px; writing-mode: vertical-rl; font-size: 210px; color: var(--vermilion); }
+    .dak { position: absolute; right: 110px; bottom: 300px; font-size: 140px; color: var(--cream); text-align: right; }
+    .iman { position: absolute; right: 116px; bottom: 236px; font-family: var(--ko); font-size: 44px; letter-spacing: 0.4em;
+      color: var(--ink); background: var(--mustard); padding: 4px 6px 4px 22px; }
+  </style>
+</head>
+<body>
+  <div class="rig">
+    <div class="cam-layer">
+      <div class="studio"></div>
+      <div class="floor"></div>
+      <div class="stand a"></div><div class="stand b"></div>
+      <div class="tube amb"></div><div class="tube teal"></div>
+      <div class="tilt" data-world>
+        <div class="floor-shadow"></div>
+        <div class="man" id="man"></div>
+      </div>
+    </div>
+  </div>
+  <div class="halftone light" data-overlap-ok></div>
+  <div class="vignette-print" data-overlap-ok></div>
+  <header class="hud" style="inset:0">
+    <h1 class="ko ko-v mis-mus m" style="--in:fade; --t:calc(-1 * var(--dur-in))">블로킹</h1>
+    <p class="en dak mis-ver m" style="--in:rise; --t:calc(-1 * var(--dur-in))">Dakwah</p>
+    <span class="iman m" style="--in:fade; --t:calc(-1 * var(--dur-in))">IMAN</span>
+  </header>
+  <script>
+    MAN.pose(document.getElementById('man'), {
+      headY:  [[0, 30], [0.08, 30], [0.6, -2], [0.8, 0]],
+      headSY: [[0, 0.88], [0.08, 0.88], [0.6, 1]],
+      lid:    [[0, 1], [0.28, 1], [0.48, 0]],
+      bodyY:  [[0, 20], [0.12, 20], [0.75, 0]],
+      bodySY: [[0, 0.95], [0.12, 0.95], [0.75, 1]],
+      brow:   [[0, 2], [0.45, 2], [0.65, -5], [1.4, 0]],
+      look:   [[0, 0], [1.2, 0], [1.6, 0]],
+    }, 0);
+  </script>
+</body>
+</html>

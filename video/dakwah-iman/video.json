@@ -1,0 +1,31 @@
+{
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "output": "out/dakwah-iman.mp4",
+  "scenes": [
+    {
+      "file": "scenes/01-studio.html",
+      "duration": 2
+    },
+    {
+      "file": "scenes/02-koran.html",
+      "duration": 2
+    },
+    {
+      "file": "scenes/03-poster.html",
+      "duration": 2
+    },
+    {
+      "file": "scenes/04-marquee.html",
+      "duration": 2
+    },
+    {
+      "file": "scenes/05-filmstrip.html",
+      "duration": 2
+    }
+  ],
+  "voiceover": {
+    "file": "assets/voiceover.wav"
+  }
+}

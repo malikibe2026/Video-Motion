@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="../ui.css">
+  <link rel="stylesheet" href="../retro.css">
+  <script src="../icons.js"></script>
+  <script src="../motion.js"></script>
+  <script src="../mouth.js"></script>
+  <script src="../man.js"></script>
+  <style>
+    body { background: var(--navy); }
+    .night { position: absolute; inset: -60px -400px;
+      background:
+        radial-gradient(40% 50% at 50% 30%, rgb(239 227 200 / 0.16), transparent 70%),
+        radial-gradient(30% 70% at 25% 75%, rgb(242 163 58 / 0.2), transparent 70%),
+        radial-gradient(30% 70% at 75% 75%, rgb(47 179 168 / 0.2), transparent 70%),
+        repeating-linear-gradient(90deg, #1d2c55 0 120px, #1a2850 120px 240px); }
+    .stagefloor { position: absolute; left: -400px; right: -400px; top: 850px; bottom: -60px; background: #121b38; border-top: 6px solid var(--ink); }
+
+    /* Marquee board with a bulb border. */
+    .marquee { position: absolute; left: 330px; top: 50px; width: 1260px; height: 330px; background: var(--ink);
+      border-radius: 26px; border: 10px solid #e0a526; box-shadow: 0 0 0 10px var(--ink); }
+    .bulbs { position: absolute; inset: -32px; }
+    .bulb { position: absolute; width: 26px; height: 26px; border-radius: 50%; background: #fff3cc;
+      box-shadow: 0 0 14px 5px rgb(255 214 120 / 0.85); animation: blink 0.4s steps(1) infinite both; }
+    .bulb.b { animation-delay: -0.2s; }
+    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.22; } }
+    .ko4 { position: absolute; left: 0; right: 0; top: 34px; text-align: center; font-size: 190px; color: var(--cream); }
+    .move { position: absolute; left: 0; right: 0; top: 222px; text-align: center; font-family: var(--en); font-size: 78px;
+      letter-spacing: 0.5em; padding-left: 0.5em; color: var(--mustard); margin: 0; }
+
+    /* Camera: dolly whip in, landing on a low-angle wide; then slow motion. */
+    .cam-layer { animation: whip 2s both; }
+    @keyframes whip {
+      0% { transform: translateX(900px) skewX(-8deg); filter: blur(10px); animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1); }
+      14% { transform: translateX(30px) skewX(0deg); filter: blur(0); animation-timing-function: linear; }
+      100% { transform: translateX(0) skewX(0deg); filter: blur(0); }
+    }
+    .tilt { position: absolute; inset: 0; transform: rotateX(8deg); transform-origin: 50% 100%; }
+    .man { left: 660px; top: 400px; transform: scale(0.86); transform-origin: 50% 0%; }
+    .floor-shadow { left: 700px; top: 1010px; }
+  </style>
+</head>
+<body>
+  <div class="rig">
+    <div class="cam-layer" data-sfx="whoosh" data-sfx-intent="camera">
+      <div class="night"></div>
+      <div class="stagefloor"></div>
+      <div class="marquee" data-world>
+        <div class="bulbs" id="bulbs"></div>
+        <h1 class="ko ko4 mis-ver">카메라</h1>
+        <p class="move mis-ink">MOVE</p>
+      </div>
+      <div class="tilt" data-world>
+        <div class="floor-shadow"></div>
+        <div class="man" id="man"></div>
+      </div>
+    </div>
+  </div>
+  <div class="halftone light" data-overlap-ok></div>
+  <div class="vignette-print" data-overlap-ok></div>
+  <script>
+    // Bulbs around the marquee, alternating phase.
+    (function () {
+      const box = document.getElementById('bulbs'), W = 1260 + 64, H = 330 + 64, s = 66;
+      let i = 0;
+      const add = (x, y) => { const b = document.createElement('i'); b.className = 'bulb' + (i++ % 2 ? ' b' : ''); b.style.left = (x - 13) + 'px'; b.style.top = (y - 13) + 'px'; box.appendChild(b); };
+      for (let x = 30; x <= W - 30; x += s) { add(x, 16); add(x, H - 16); }
+      for (let y = 16 + s; y <= H - 16 - s / 2; y += s) { add(16, y); add(W - 16, y); }
+    })();
+    // Points at the lens (fingertip toward camera), then draws a line sideways — in slow motion.
+    MAN.pose(document.getElementById('man'), {
+      uR:    [[0, -6], [0.28, -30], [0.85, -32], [1.05, -55, 'lin'], [1.2, -79, 'lin'], [1.35, -93, 'lin'], [1.5, -95, 'lin'], [1.65, -93, 'lin'], [1.8, -81, 'lin'], [1.95, -55, 'lin']],
+      fR:    [[0, -20], [0.28, 120], [0.85, 121], [1.05, 119, 'lin'], [1.2, 119, 'lin'], [1.35, 111, 'lin'], [1.5, 94, 'lin'], [1.65, 73, 'lin'], [1.8, 42, 'lin'], [1.95, -9, 'lin']],
+      handR: [[0, 'rest'], [0.22, 'lens'], [1.0, 'point']],
+      handRS:[[0, 1], [0.25, 1.9], [0.9, 1.9], [1.05, 1.3], [2, 1.3]],
+      brow:  [[0, 0], [0.3, -4], [1.2, -2]],
+      lean:  [[0, 0], [0.4, 1.5], [2, 1]],
+      look:  [[0, 0], [1.0, 0], [1.9, 5]],
+    }, 6, { trail: { side: 'r', from: 1.1, to: 1.95, color: '#e0a526', width: 16, reach: 70 } });
+  </script>
+</body>
+</html>

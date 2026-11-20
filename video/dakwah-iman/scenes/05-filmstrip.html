@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="../ui.css">
+  <link rel="stylesheet" href="../retro.css">
+  <script src="../icons.js"></script>
+  <script src="../motion.js"></script>
+  <script src="../mouth.js"></script>
+  <script src="../man.js"></script>
+  <style>
+    body { background: #2a1f14; }
+    :root { --grain-opacity: 0.18; }
+    /* Sepia film strip: sprocket bands top and bottom, a frame gate, drifting slowly. */
+    .sepia { position: absolute; inset: 0;
+      background: radial-gradient(70% 80% at 60% 45%, #d9b98a, #b48a57 70%, #7d5a35); }
+    .band { position: absolute; left: -200px; right: -200px; height: 120px; background: #2a1f14;
+      background-image: radial-gradient(closest-side, transparent 0, transparent 0),
+        linear-gradient(90deg, transparent 0 28px, #e8d3ad 28px 76px, transparent 76px 104px);
+      background-size: 104px 54px; background-repeat: repeat-x; background-position: 0 33px;
+      animation: roll 2s linear both; }
+    .band.top { top: 0; } .band.bot { bottom: 0; }
+    @keyframes roll { from { background-position-x: 0; } to { background-position-x: -104px; } }
+    .gate { position: absolute; left: 40px; right: 40px; top: 140px; bottom: 140px; border-radius: 22px;
+      box-shadow: inset 0 0 0 6px rgb(42 31 20 / 0.7), inset 0 0 120px 30px rgb(42 31 20 / 0.45); }
+    .scratch { position: absolute; top: 120px; bottom: 120px; width: 2px; background: rgb(239 227 200 / 0.35); }
+
+    /* Camera: pulls back and rises slowly, then holds still. */
+    .cam-layer { animation: pull 2s both; transform-origin: 66% 40%; }
+    @keyframes pull {
+      0% { transform: scale(1.22) translateY(-60px); animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1); }
+      70%, 100% { transform: scale(1) translateY(0); }
+    }
+    .man { left: 980px; top: 150px; transform: scale(0.88); transform-origin: 50% 0%; filter: sepia(0.35) saturate(0.9); }
+    .floor-shadow { left: 1020px; top: 930px; }
+
+    /* Closing card: ornate frame, 끝 and THE END. */
+    .card { position: absolute; left: 150px; top: 230px; width: 700px; height: 620px; border: 10px double #2a1f14;
+      border-radius: 50% / 18%; background: rgb(239 227 200 / 0.88); display: grid; place-items: center; align-content: center; gap: 10px; }
+    .card::before, .card::after { content: ""; position: absolute; left: 90px; right: 90px; height: 6px; background: #2a1f14; }
+    .card::before { top: 70px; } .card::after { bottom: 70px; }
+    .kkeut { font-size: 270px; color: #2a1f14; }
+    .theend { font-family: var(--en); font-size: 104px; color: #8f2c1b; letter-spacing: 0.06em; margin: 0; }
+    .orn { font-family: var(--en); font-size: 48px; color: #2a1f14; margin: 0; letter-spacing: 0.4em; }
+  </style>
+</head>
+<body>
+  <div class="rig">
+    <div class="cam-layer">
+      <div class="sepia"></div>
+      <div class="scratch" style="left: 420px"></div><div class="scratch" style="left: 1610px; opacity: 0.5"></div>
+      <div data-world>
+        <div class="floor-shadow"></div>
+        <div class="man" id="man"></div>
+      </div>
+    </div>
+  </div>
+  <div class="gate" data-overlap-ok></div>
+  <div class="band top" data-overlap-ok></div>
+  <div class="band bot" data-overlap-ok></div>
+  <div class="halftone" data-overlap-ok></div>
+  <div class="vignette-print" data-overlap-ok></div>
+  <header class="hud" style="inset:0">
+    <div class="card m" style="--in:zoom; --t:-0.1s; --in-dur:0.6s">
+      <h1 class="ko kkeut mis-ver">끝</h1>
+      <p class="theend mis-mus">THE END</p>
+    </div>
+  </header>
+  <script>
+    // Leans back, nods, smiles, shrugs with open palms.
+    MAN.pose(document.getElementById('man'), {
+      lean:   [[0, 0], [0.45, -3]],
+      bodyY:  [[0, 0], [0.45, 8]],
+      headY:  [[0, 0], [0.5, 0], [0.7, 9], [0.9, 0], [1.05, 6], [1.2, 0], [1.4, 4], [1.75, 4], [2, 3]],
+      headSY: [[0, 1], [0.5, 1], [0.7, 0.96], [0.9, 1], [1.05, 0.97], [1.2, 1]],
+      headR:  [[0, 0], [1.3, 0], [1.6, -4]],
+      smile:  [[0, 0], [0.35, 1]],
+      brow:   [[0, 0], [1.3, 0], [1.55, -7], [2, -6]],
+      uL:     [[0, 0], [1.3, 0], [1.6, 22]],
+      fL:     [[0, 0], [1.3, 0], [1.6, 78]],
+      uR:     [[0, 0], [1.3, 0], [1.6, -22]],
+      fR:     [[0, 0], [1.3, 0], [1.6, -78]],
+      handL:  [[0, 'rest'], [1.35, 'open']],
+      handR:  [[0, 'rest'], [1.35, 'open']],
+    }, 8);
+  </script>
+</body>
+</html>
