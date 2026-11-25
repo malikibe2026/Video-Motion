@@ -10,12 +10,12 @@ Satu klip setiap babak: voice/NN.mp3. Status: [x] siap, [ ] belum.
 - [x] 05 Dia dipaksa masuk ke sebuah unit yang toksik, menggantikan orang yang lari. Ketua unitnya, Gred sepuluh, suka membuli.
 - [x] 06 Dia dieksploitasi, sehingga burnout. Sehingga dia terpaksa berjumpa kaunselor.
 - [x] 07 Namun, dalam sunyinya, dia melakukan keajaiban. Dia menguruskan empat belas staf. Menang sembilan puluh enam undi sebagai Ketua Biro, tiga penggal. Dan membawa pasukan balapan Zon Tengah meraih dua pingat emas.
-- [ ] 08 Tetapi dia sedar... dia perlu pergi, untuk menyelamatkan nyawanya.
+- [x] 08 Tetapi dia sedar... dia perlu pergi, untuk menyelamatkan nyawanya.
 - [x] 09 Bab dua. Realiti pahit, kembali ke Kuala Lumpur.
-- [ ] 10 Dia berjaya bertukar ke Kuala Lumpur. Lima belas kilometer, bukan lagi tiga puluh empat. Tetapi kembali ke tempat lama, bukan pelarian yang mudah.
-- [ ] 11 Orang lama masih memanggilnya, budak Gred satu. Dia diabaikan di meja terbuka, dan diberi beban kerja yang tidak adil.
-- [ ] 12 Dalam mesyuarat, dia dipandang kosong kerana tidak pandai bercakap. Pengarah yang dulu membantunya, kini menganggapnya sekadar orang yang layak membaca doa.
-- [ ] 13 Itulah titik terendah dalam hidupnya. Dia rasa... dia tidak berfungsi.
+- [x] 10 Dia berjaya bertukar ke Kuala Lumpur. Lima belas kilometer, bukan lagi tiga puluh empat. Tetapi kembali ke tempat lama, bukan pelarian yang mudah.
+- [x] 11 Orang lama masih memanggilnya, budak Gred satu. Dia diabaikan di meja terbuka, dan diberi beban kerja yang tidak adil.
+- [x] 12 Dalam mesyuarat, dia dipandang kosong kerana tidak pandai bercakap. Pengarah yang dulu membantunya, kini menganggapnya sekadar orang yang layak membaca doa.
+- [x] 13 Itulah titik terendah dalam hidupnya. Dia rasa... dia tidak berfungsi.
 - [ ] 14 Bab tiga. Rahsia di sebalik tabir.
 - [ ] 15 Apa yang mereka tidak tahu... Maliki seorang genius teknologi yang belajar sendiri. Di meja kerjanya yang sunyi, dia telah membina empat sistem aplikasi. Direktori Dozem, Jadual Solat, Muslim Smart Kids, dan WorldStat Atlas.
 - [ ] 16 Lebih hebat lagi, dia mencipta Hermes. Sebuah sistem A I dengan lima ejen peribadi: Maliki Admin, Data, Browser, Studio, dan Operasi. Semuanya dikawal melalui Telegram.
