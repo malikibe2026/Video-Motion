@@ -6,10 +6,10 @@ Satu klip setiap babak: voice/NN.mp3. Status: [x] siap, [ ] belum.
 - [x] 01 Ini kisah seorang pegawai. Maliki... arkitek sunyi.
 - [x] 02 Ini Maliki. Tiga puluh enam tahun. Seorang suami, seorang bapa, pegawai perangkaan Gred lima. Seorang introvert yang pemalu, dan sering bergelut dengan anxiety.
 - [x] 03 [softly] Dia tidak pernah pulang kerja dengan air mata... walaupun hatinya sering remuk.
-- [ ] 04 Bab satu. Neraka Selangor.   (sedang dicuba semula oleh ElevenLabs)
-- [ ] 05 Dia dipaksa masuk ke sebuah unit yang toksik, menggantikan orang yang lari. Ketua unitnya, Gred sepuluh, suka membuli.
-- [ ] 06 Dia dieksploitasi, sehingga burnout. Sehingga dia terpaksa berjumpa kaunselor.
-- [ ] 07 Namun, dalam sunyinya, dia melakukan keajaiban. Dia menguruskan empat belas staf. Menang sembilan puluh enam undi sebagai Ketua Biro, tiga penggal. Dan membawa pasukan balapan Zon Tengah meraih dua pingat emas.
+- [x] 04 Bab satu. Neraka Selangor.
+- [x] 05 Dia dipaksa masuk ke sebuah unit yang toksik, menggantikan orang yang lari. Ketua unitnya, Gred sepuluh, suka membuli.
+- [x] 06 Dia dieksploitasi, sehingga burnout. Sehingga dia terpaksa berjumpa kaunselor.
+- [x] 07 Namun, dalam sunyinya, dia melakukan keajaiban. Dia menguruskan empat belas staf. Menang sembilan puluh enam undi sebagai Ketua Biro, tiga penggal. Dan membawa pasukan balapan Zon Tengah meraih dua pingat emas.
 - [ ] 08 Tetapi dia sedar... dia perlu pergi, untuk menyelamatkan nyawanya.
 - [x] 09 Bab dua. Realiti pahit, kembali ke Kuala Lumpur.
 - [ ] 10 Dia berjaya bertukar ke Kuala Lumpur. Lima belas kilometer, bukan lagi tiga puluh empat. Tetapi kembali ke tempat lama, bukan pelarian yang mudah.
@@ -17,7 +17,7 @@ Satu klip setiap babak: voice/NN.mp3. Status: [x] siap, [ ] belum.
 - [ ] 12 Dalam mesyuarat, dia dipandang kosong kerana tidak pandai bercakap. Pengarah yang dulu membantunya, kini menganggapnya sekadar orang yang layak membaca doa.
 - [ ] 13 Itulah titik terendah dalam hidupnya. Dia rasa... dia tidak berfungsi.
 - [ ] 14 Bab tiga. Rahsia di sebalik tabir.
-- [ ] 15 Apa yang mereka tidak tahu... Maliki seorang genius teknologi yang belajar sendiri. Di meja kerjanya yang sunyi, dia telah membina empat sistem aplikasi. Direktori D O S M, Jadual Solat, Muslim Smart Kids, dan WorldStat Atlas.
+- [ ] 15 Apa yang mereka tidak tahu... Maliki seorang genius teknologi yang belajar sendiri. Di meja kerjanya yang sunyi, dia telah membina empat sistem aplikasi. Direktori Dozem, Jadual Solat, Muslim Smart Kids, dan WorldStat Atlas.
 - [ ] 16 Lebih hebat lagi, dia mencipta Hermes. Sebuah sistem A I dengan lima ejen peribadi: Maliki Admin, Data, Browser, Studio, dan Operasi. Semuanya dikawal melalui Telegram.
 - [ ] 17 Ketika orang lain sibuk berdebat tentang teori A I dalam mesyuarat, Maliki duduk di masjid, menunaikan solat Jumaat... sementara lima ejen A I nya menyiapkan kerja di pejabat.
 - [ ] 18 Bab empat. Konflik batin.
