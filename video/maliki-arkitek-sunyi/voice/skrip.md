@@ -22,7 +22,7 @@ Satu klip setiap babak: voice/NN.mp3. Status: [x] siap, [ ] belum.
 - [x] 17 Ketika orang lain sibuk berdebat tentang teori A I dalam mesyuarat, Maliki duduk di masjid, menunaikan solat Jumaat... sementara lima ejen A I nya menyiapkan kerja di pejabat.
 - [x] 18 Bab empat. Konflik batin.
 - [x] 19 Maliki sering terfikir untuk berhenti kerja. Dia rasa dirinya lambat faham dalam kursus S A S, walaupun dulu dia mendapat enam A dalam S P M. Dia rasa tercabar melihat staf baru yang pandai bercakap, dan disayangi bos.
-- [ ] 20 Namun, dia mula sedar. Dia tidak perlu bersaing untuk menjadi bintang di pentas. Dia adalah arkitek di belakang tabir. Dia tidak perlu menjadi orang lain untuk dihargai.
+- [x] 20 Namun, dia mula sedar. Dia tidak perlu bersaing untuk menjadi bintang di pentas. Dia adalah arkitek di belakang tabir. Dia tidak perlu menjadi orang lain untuk dihargai.
 - [ ] 21 Bab lima. Kemenangan sebenar.
 - [ ] 22 Maliki berhenti meminta pengiktirafan daripada orang yang salah. Dia belajar melepaskan. Jawatan yang tak diberi. Juruacara yang tak dipilih. Perhatian bos yang tak kunjung tiba.
 - [ ] 23 Dia memilih untuk fokus pada isteri dan anaknya. Dan pada ketenangan hatinya sendiri.
