@@ -1,0 +1,44 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style>.bl { position:absolute; width:190px; text-align:center; font-family:var(--mono); font-weight:600; font-size:28px; line-height:1.15; color:var(--gold); }</style></head><body>
+<div class="bp" style="--glow: rgb(242 193 78 / .14); --glow-x:68%; --glow-y:60%"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <path class="ground" d="M100 880 H1820"/>
+  <g class="ink gold">
+    <path data-draw data-at="0.2" data-dur="1.0" d="M800 880 V580 H990 V880"/>
+    <path data-draw data-at="0.6" data-dur="1.0" d="M990 880 V500 H1180 V880"/>
+    <path data-draw data-at="1.0" data-dur="1.3" d="M1180 880 V360 L1275 300 L1370 360 V880"/>
+    <path data-draw data-at="1.4" data-dur="1.0" d="M1370 880 V540 H1560 V880"/>
+    <path data-draw data-at="1.8" data-dur="1.0" d="M1560 880 V460 H1750 V880"/>
+  </g>
+  <g class="ink gold thin" style="opacity:.6"><path data-draw data-dash="6 10" data-at="2.4" data-dur="2" d="M830 720 h130 M830 780 h130 M1020 640 h130 M1020 720 h130 M1210 480 h130 M1210 560 h130 M1210 640 h130 M1400 680 h130 M1400 760 h130 M1590 600 h130 M1590 680 h130 M1590 760 h130"/></g>
+  <g id="horse" class="ink"></g>
+</svg>
+<div class="bl m" style="left:800px; top:598px; --in:fade; --t:1.2s">DIREKTORI<br>DOSM</div>
+<div class="bl m" style="left:990px; top:518px; --in:fade; --t:1.6s">JADUAL<br>SOLAT</div>
+<div class="bl m" style="left:1180px; top:385px; --in:fade; --t:2.2s; font-size:34px">HERMES</div>
+<div class="bl m" style="left:1370px; top:558px; --in:fade; --t:2.4s">MUSLIM<br>SMART KIDS</div>
+<div class="bl m" style="left:1560px; top:478px; --in:fade; --t:2.8s">WORLDSTAT<br>ATLAS</div>
+<p class="say wide m" style="top:110px; --in:rise; --t:-0.2s">Dia terus membina <b>empayar AI-nya</b>.</p>
+<p class="say wide m" style="top:195px; --in:rise; --t:5.2s">Dia <b>kuda</b> yang tidak perlu berlari untuk orang lain.</p>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>24 / 26</span></div>
+<script>
+Stick.add({ parent:'#w', x:640, y:880, s:1.7, color:'var(--gold)', face:'smile', keys:[[0,'proud']], dirKeys:[[0,1]] });
+// a calm horse, grazing, drawn in chalk
+const hg = document.querySelector('#horse'); const parts = {};
+for (const k of ['body','neck','head','l1','l2','l3','l4','tail']) parts[k] = Stick.el('path', { pathLength: 1 }, hg);
+__video.on(ms => { const t = ms/1000; const d = Stick.easeOut(Stick.clamp((t - 4.4)/1.2));
+  const g = Math.pow((Math.sin(t*0.9 - 1) + 1)/2, 3); // mostly head up, now and then lowers to graze
+  const bx = 330, by = 690;
+  const nx = bx - 120, ny = by - 30;                      // withers / neck base
+  const hx = Stick.lerp(bx - 190, bx - 175, g), hy = Stick.lerp(560, 800, g); // poll
+  const mx = hx - Stick.lerp(55, 20, g), my = hy + Stick.lerp(45, 70, g);    // muzzle
+  parts.body.setAttribute('d', `M${bx-130} ${by} C ${bx-120} ${by-70}, ${bx+110} ${by-70}, ${bx+130} ${by-5} C ${bx+120} ${by+60}, ${bx-110} ${by+60}, ${bx-130} ${by}`);
+  parts.neck.setAttribute('d', `M${nx} ${ny} Q ${(nx+hx)/2 - 10} ${(ny+hy)/2 - 25} ${hx} ${hy} M${bx-95} ${by+20} Q ${(bx-95+hx)/2 + 20} ${(by+hy)/2 + 30} ${hx + 8} ${hy + 30}`);
+  parts.head.setAttribute('d', `M${hx} ${hy} L${mx} ${my} Q ${mx - 6} ${my + 16} ${mx + 14} ${my + 14} L${hx + 10} ${hy + 30} M${hx + 2} ${hy} l 6 -24 l 10 22`);
+  parts.l1.setAttribute('d', `M${bx-100} ${by+35} L${bx-108} 880`); parts.l2.setAttribute('d', `M${bx-66} ${by+42} L${bx-58} 880`);
+  parts.l3.setAttribute('d', `M${bx+70} ${by+42} L${bx+62} 880`); parts.l4.setAttribute('d', `M${bx+104} ${by+30} L${bx+112} 880`);
+  parts.tail.setAttribute('d', `M${bx+128} ${by-20} q ${34 + Math.sin(t*2)*10} 30 ${18 + Math.sin(t*2)*12} 120`);
+  for (const p of Object.values(parts)) { p.style.strokeDasharray = `${d} 2`; p.style.strokeOpacity = d > 0 ? 1 : 0; } });
+</script></body></html>

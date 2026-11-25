@@ -1,0 +1,25 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style>
+  .q { position:absolute; left:220px; right:220px; top:230px; text-align:center; font-family:var(--hand); font-weight:700; font-size:62px; line-height:1.25; color:var(--fg); margin:0; }
+  .fin1 { position:absolute; left:0; right:0; top:300px; text-align:center; font-family:var(--hand); font-weight:700; font-size:130px; line-height:1; color:var(--gold); margin:0; }
+  .fin2 { position:absolute; left:160px; right:160px; top:480px; text-align:center; font-family:var(--hand); font-weight:700; font-size:66px; line-height:1.2; color:var(--fg); margin:0; }
+  .star { fill: var(--fg); animation: tw 2.2s ease-in-out infinite alternate; }
+  @keyframes tw { from { opacity:.25 } to { opacity:.9 } }
+</style></head><body>
+<div class="bp" style="--tint: rgb(0 8 20 / .25); --glow: rgb(242 193 78 / .10); --glow-y:85%"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <circle class="star" cx="260" cy="200" r="3"/><circle class="star" cx="420" cy="140" r="2.5" style="animation-delay:.7s"/><circle class="star" cx="1520" cy="180" r="3" style="animation-delay:1.1s"/><circle class="star" cx="1700" cy="260" r="2.5" style="animation-delay:.3s"/><circle class="star" cx="1640" cy="110" r="2" style="animation-delay:1.6s"/><circle class="star" cx="180" cy="330" r="2" style="animation-delay:.9s"/>
+  <path class="ink gold" d="M1600 330 a 50 50 0 1 0 40 -80 a 40 40 0 1 1 -40 80" style="opacity:.8"/>
+  <path class="ground" d="M700 990 H1220"/>
+  <g class="ink"><path d="M880 930 H1040"/><path d="M895 930 V990 M1025 930 V990"/></g>
+</svg>
+<div class="tag m" style="left:0; right:0; text-align:center; top:150px; --in:fade; --t:-0.2s; --out:fade-out; --out-t:8.4s">PESAN</div>
+<p class="q m" data-split="words" data-in="rise" data-t="0.2" data-stagger="0.12" style="--out:fade-out; --out-t:8.4s">“Kau mungkin tidak diiktiraf di permukaan, tetapi ketahuilah bahawa kau memegang kuasa yang tidak dimiliki oleh mereka yang bising.”</p>
+<p class="fin1 m" style="--in:blur; --t:9.0s">Kau bukan gagal.</p>
+<p class="fin2 m" style="--in:rise; --t:10.4s">Kau cuma sedang berehat selepas bertarung.</p>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>26 / 26</span></div>
+<script>
+Stick.add({ parent:'#w', x:960, y:990, s:1.3, color:'var(--gold)', face:'smile', keys:[[0,{ lean:-6, tilt:-10, aB:[-30,-70], aF:[-20,-60], lB:[86,4], lF:[92,8], hy:60/1.3 }]], idle:true });
+</script></body></html>

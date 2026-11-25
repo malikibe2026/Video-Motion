@@ -1,0 +1,33 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style>.spot { fill: var(--gold); }</style></head><body>
+<div class="bp" style="--tint: rgb(150 120 220 / .06); --glow: rgb(242 193 78 / .08)"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <g id="cam">
+    <path class="ground" d="M-200 860 H3000"/>
+    <path class="ink" d="M200 860 V800 H1720 V860"/>
+    <polygon id="spot" class="spot" points="940,180 980,180 1140,800 780,800" style="opacity:.14"/>
+    <path class="ink" d="M920 190 H1000 L975 160 H945 Z"/>
+    <path class="ink" d="M120 140 H1800"/>
+    <path class="ink" d="M140 140 C 200 400, 160 600, 240 800 L140 800 Z" style="fill:var(--bg-2)"/><path class="ink" d="M1780 140 C 1720 400, 1760 600, 1680 800 L1780 800 Z" style="fill:var(--bg-2)"/>
+    <path class="ink" d="M1860 140 V860" stroke-dasharray="16 12"/>
+    <g id="fly" class="ink gold thin"><path d="M960 160 V100 H2240 V560" stroke-dasharray="10 10"/></g>
+    <g class="ink"><path d="M2330 860 V700 H2520 V860"/><path d="M2360 730 h40 M2420 730 h40 M2360 770 h40 M2420 770 h40"/><path id="lever" d="M2470 700 L2500 620"/><circle id="knob" cx="2500" cy="620" r="12" fill="var(--gold)" stroke="none"/></g>
+    <g id="people"></g>
+  </g>
+</svg>
+<p class="say wide m" style="top:110px; --in:rise; --t:-0.2s">Dia mula sedar: dia tidak perlu menjadi <b>bintang di pentas</b>.</p>
+<p class="say big wide m" style="top:200px; --in:blur; --t:6.4s">Dia <b>arkitek di belakang tabir</b>.</p>
+<p class="say small wide m" style="top:310px; --in:rise; --t:9.2s">Dia tidak perlu menjadi orang lain untuk dihargai.</p>
+<div class="tag m" style="left:1250px; top:880px; --in:fade; --t:6.0s">BELAKANG TABIR</div>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>20 / 26</span></div>
+<script>
+Stick.add({ parent:'#people', x:960, y:800, s:1.8, face:'happy', keys:[[0,'cheer'],[1.2,'wave',0.5],[2.4,'cheer',0.5],[3.6,'wave',0.5],[4.8,'cheer',0.5],[6.0,'wave',0.5],[7.2,'cheer',0.5],[8.4,'wave',0.5],[9.6,'cheer',0.5],[10.8,'wave',0.5]] });
+Stick.add({ parent:'#people', x:2240, y:860, s:1.8, color:'var(--gold)', face:'smile', keys:[[0,'holdOut'],[7.4,'holdOut'],[7.8,'proud',0.5]] });
+const cam = document.querySelector('#cam'), spot = document.querySelector('#spot');
+__video.on(ms => { const t = ms/1000; const k = Stick.easeIO(Stick.clamp((t - 3.4)/2.6));
+  const sc = Stick.lerp(0.82, 0.6, k), tx = Stick.lerp(173, 50, k), ty = Stick.lerp(200, 384, k);
+  cam.setAttribute('transform', `translate(${tx.toFixed(1)} ${ty.toFixed(1)}) scale(${sc.toFixed(4)})`);
+  spot.style.opacity = (0.12 + 0.05*Math.sin(t*3)).toFixed(3); });
+</script></body></html>

@@ -1,0 +1,29 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style>
+  .ico { position:absolute; font-size:110px; color:var(--fg); --icon-stroke:1.6; transform: translate(-50%,-50%); }
+  .car { position:absolute; font-size:64px; color:var(--gold); }
+</style></head><body>
+<div class="bp" style="--tint: rgb(150 160 180 / .08)"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <path id="p34" class="ink coral" data-draw data-dash="14 12" data-at="0.4" data-dur="1.6" d="M330 640 C 700 860, 1200 860, 1620 640"/>
+  <path id="p15" class="ink gold" data-draw data-at="2.8" data-dur="1.2" d="M330 600 C 520 470, 760 450, 940 500"/>
+</svg>
+<div class="m" style="--in:pop; --t:-0.3s"><div class="ico" style="left:290px; top:620px"><i data-icon="house"></i></div></div>
+<div class="tag white m" style="left:220px; top:700px; --in:fade; --t:-0.2s">RUMAH</div>
+<div id="sel" class="m" style="--in:pop; --t:0.2s"><div class="ico" style="left:1660px; top:620px; color:var(--coral)"><i data-icon="building"></i></div><div class="tag coral" style="left:1560px; top:700px">SELANGOR</div></div>
+<div class="tag coral m" style="left:1180px; top:760px; --in:rise; --t:1.6s">34 KM</div>
+<div class="m" style="--in:pop; --t:2.4s"><div class="ico" style="left:1000px; top:500px; color:var(--gold)"><i data-icon="landmark"></i></div><div class="tag" style="left:1060px; top:470px">KUALA LUMPUR</div></div>
+<div class="tag m" style="left:560px; top:420px; --in:rise; --t:3.6s">15 KM</div>
+<div class="car" id="car"><i data-icon="car"></i></div>
+<p class="say wide m" style="top:110px; --in:rise; --t:-0.2s">Dia berjaya bertukar ke KL — <b>15 km</b>, bukan lagi 34 km.</p>
+<p class="say wide m" style="top:900px; --in:rise; --t:5.0s">Tetapi kembali ke tempat lama bukan pelarian yang mudah.</p>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>10 / 26</span></div>
+<script>
+const p15 = document.querySelector('#p15'), p34 = document.querySelector('#p34'), car = document.querySelector('#car'), sel = document.querySelector('#sel');
+__video.on(ms => { const t = ms/1000;
+  const k = Stick.lerp(0.1, 0.8, Stick.easeIO(Stick.clamp((t - 4.0)/2.4))); const L = p15.getTotalLength(); const pt = p15.getPointAtLength(L*k);
+  car.style.left = (pt.x - 32) + 'px'; car.style.top = (pt.y - 70) + 'px'; car.style.opacity = t > 3.9 ? 1 : 0;
+  const d = Stick.lerp(1, 0.3, Stick.clamp((t - 3.8)/0.6)); p34.style.opacity = d; sel.style.filter = `opacity(${d.toFixed(3)})`; });
+</script></body></html>

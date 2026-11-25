@@ -1,0 +1,4 @@
+out/*
+!out/*.mp4
+out/*.no-bed.mp4
+scratch/

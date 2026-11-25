@@ -1,0 +1,30 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style></style></head><body>
+<div class="bp" style="--tint: rgb(255 170 120 / .05); --glow: rgb(255 170 120 / .10); --glow-x:85%; --glow-y:70%"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <path class="ground" d="M100 880 H1820"/>
+  <g class="ink"><path d="M140 880 V470 H420 V880"/><path d="M180 520 h50 M260 520 h50 M340 520 h50 M180 600 h50 M260 600 h50 M340 600 h50 M180 680 h50 M260 680 h50 M340 680 h50"/><path d="M320 880 V780 H390 V880"/></g>
+  <g class="ink"><path d="M1530 880 V650 L1650 560 L1770 650 V880"/><path d="M1620 880 V790 H1680 V880"/><path d="M1560 700 h40 v40 h-40 z"/></g>
+  <path class="ink faint thin" data-draw data-dash="10 14" data-at="0" data-dur="7.5" d="M430 900 H1520"/>
+  <circle cx="1700" cy="430" r="60" class="ink gold thin" style="opacity:.6"/>
+</svg>
+<p class="say wide m" style="top:110px; --in:rise; --t:-0.2s">Dia tidak pernah pulang kerja dengan <b>air mata</b>…</p>
+<p class="say wide m" style="top:200px; --in:rise; --t:3.4s">…walaupun hatinya sering <em>remuk</em>.</p>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>03 / 26</span></div>
+<script>
+Stick.add({ parent:'#w', x:430, y:880, s:1.6, color:'var(--gold)', cls:'maliki', face:'neutral', move:[[0.2,[430,880]],[7.6,[1440,880],t=>t]], walk:[[0.2,7.6]], keys:[[0,'stand']],
+  extra:(g, el) => {
+    const heart = el('path', { d:'M0 7 C -15 -3, -9 -17, 0 -8 C 9 -17, 15 -3, 0 7 Z', fill:'var(--gold)', stroke:'none' }, g);
+    const crack = el('path', { d:'M1 -8 L-3 -2 L2 1 L-2 6', fill:'none', stroke:'var(--bg)', 'stroke-width':2.4, 'stroke-linecap':'round', pathLength:1 }, g);
+    return (j, ms) => {
+      const t = ms/1000, x = j.sh[0]*0.62 + j.hip[0]*0.38 + 14*j.dir, y = j.sh[1]*0.62 + j.hip[1]*0.38;
+      const k = Stick.clamp((t-3.7)/0.7), sc = 1.9*j.s*(1 + Math.sin(Math.min(1,k)*Math.PI)*0.25);
+      const tr = `translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${sc.toFixed(3)})`;
+      heart.setAttribute('transform', tr); crack.setAttribute('transform', tr);
+      heart.setAttribute('fill', k > 0.5 ? 'var(--coral)' : 'var(--gold)');
+      crack.style.strokeDasharray = `${Stick.easeOut(k)} 2`; crack.style.strokeOpacity = k>0?1:0;
+    };
+  } });
+</script></body></html>

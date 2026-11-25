@@ -1,0 +1,29 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style></style></head><body>
+<div class="bp" style="--glow: rgb(242 193 78 / .10)"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <path class="ground" d="M520 930 H1400"/>
+  <g class="ink gold thin">
+    <path data-draw data-dash="6 8" data-at="1.4" data-dur="0.6" d="M640 492 L905 505"/>
+    <path data-draw data-dash="6 8" data-at="2.3" data-dur="0.6" d="M1170 545 L1000 585"/>
+    <path data-draw data-dash="6 8" data-at="3.2" data-dur="0.6" d="M600 662 L915 650"/>
+    <path data-draw data-dash="6 8" data-at="4.1" data-dur="0.6" d="M1170 785 L1005 790"/>
+    <path class="coral" style="stroke:var(--coral)" data-draw data-dash="6 8" data-at="5.0" data-dur="0.6" d="M680 842 L925 830"/>
+  </g>
+</svg>
+<p class="say big center-x m" style="top:110px; --in:rise; --t:-0.2s; --out:sink-out; --out-t:5.4s">Ini <b>Maliki</b>.</p>
+<p class="say wide m" style="top:110px; --in:rise; --t:5.8s">Seorang <b>introvert</b> di dunia yang memuja orang extrovert.</p>
+<div class="tag m" style="left:470px; top:470px; --in:left; --t:1.6s">36 TAHUN</div>
+<div class="tag m" style="left:1185px; top:505px; --in:right; --t:2.5s">PEGAWAI PERANGKAAN</div>
+<div class="tag m" style="left:1185px; top:547px; --in:right; --t:2.6s">GRED 5</div>
+<div class="tag m" style="left:360px; top:640px; --in:left; --t:3.4s">SUAMI · BAPA</div>
+<div class="tag m" style="left:1185px; top:766px; --in:right; --t:4.3s">INTROVERT · PEMALU</div>
+<div class="tag coral m" style="left:510px; top:822px; --in:left; --t:5.2s">ANXIETY</div>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>02 / 26</span></div>
+<script>
+Stick.add({ parent:'#w', x:960, y:930, s:2.1, color:'var(--gold)', cls:'maliki', draw:-0.3, drawDur:1.0, face:'smile',
+  keys:[[0,'stand'],[1.0,'stand'],[1.5,'wave',0.4],[2.6,'wave'],[3.0,'think',0.4],[5.6,'think'],[6.1,'standSad',0.5]],
+  faceKeys:[[0,'smile'],[6.0,'neutral']] });
+</script></body></html>

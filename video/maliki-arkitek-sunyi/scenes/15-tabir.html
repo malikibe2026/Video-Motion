@@ -1,0 +1,33 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style>
+  .cur { animation: var(--k) 1.8s cubic-bezier(.65,0,.35,1) 0.5s both; }
+  @keyframes curL { to { translate: -980px 0 } }
+  @keyframes curR { to { translate: 980px 0 } }
+  .screen { fill: var(--gold); opacity: .14; animation: flick 1.7s ease-in-out infinite alternate; }
+  @keyframes flick { from { opacity: .10 } to { opacity: .18 } }
+</style></head><body>
+<div class="bp" style="--tint: rgb(242 193 78 / .04); --glow: rgb(242 193 78 / .14)"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <path class="ground" d="M200 900 H1720"/>
+  <g class="ink"><path d="M890 762 H1170"/><path d="M915 762 V900 M1145 762 V900"/><path d="M765 828 H875 M780 828 L766 900 M860 828 L874 900"/>
+    <path d="M960 760 H1080 L1100 652"/></g>
+  <polygon class="screen" points="1096,662 1082,752 960,724 978,664"/>
+  <g class="cur" style="--k:curL"><path d="M0 280 H962 V912 H0 Z" fill="var(--bg-2)"/><path class="ink thin faint" d="M120 290 C 140 500, 100 700, 130 900 M300 290 C 320 500, 280 700, 310 900 M480 290 C 500 500, 460 700, 490 900 M660 290 C 680 500, 640 700, 670 900 M840 290 C 860 500, 820 700, 850 900"/><path class="ink" d="M960 280 V900"/></g>
+  <g class="cur" style="--k:curR"><path d="M958 280 H1920 V912 H958 Z" fill="var(--bg-2)"/><path class="ink thin faint" d="M1080 290 C 1100 500, 1060 700, 1090 900 M1260 290 C 1280 500, 1240 700, 1270 900 M1440 290 C 1460 500, 1420 700, 1450 900 M1620 290 C 1640 500, 1600 700, 1630 900 M1800 290 C 1820 500, 1780 700, 1810 900"/><path class="ink" d="M960 280 V900"/></g>
+  <path class="ink" d="M60 280 H1860"/>
+</svg>
+<p class="say wide m" style="top:110px; --in:rise; --t:-0.2s">Apa yang mereka tidak tahu:</p>
+<p class="say wide m" style="top:195px; --in:rise; --t:2.4s">Maliki seorang <b>genius teknologi</b> yang belajar sendiri.</p>
+<div class="appc m" style="left:170px; top:390px; --in:fly; --fx:900px; --fy:300px; --t:5.0s"><i data-icon="contact"></i>Direktori DOSM</div>
+<div class="appc m" style="left:1300px; top:390px; --in:fly; --fx:-280px; --fy:300px; --t:5.6s"><i data-icon="moon-star"></i>Jadual Solat</div>
+<div class="appc m" style="left:120px; top:600px; --in:fly; --fx:950px; --fy:100px; --t:6.2s"><i data-icon="baby"></i>Muslim Smart Kids</div>
+<div class="appc m" style="left:1300px; top:600px; --in:fly; --fx:-280px; --fy:100px; --t:6.8s"><i data-icon="globe"></i>WorldStat Atlas</div>
+<p class="say wide m" style="top:920px; --in:rise; --t:8.2s"><b>4 sistem aplikasi</b> — dibina di meja yang sunyi.</p>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>15 / 26</span></div>
+<script>
+Stick.add({ parent:'#w', x:820, y:900, s:1.6, color:'var(--gold)', face:'smile', keys:[[0,'sitType']], type:[[0,13]] });
+// the stage group is the first child; keep the figure behind curtains
+const w = document.querySelector('#w'); const fig = w.querySelector('.fig'); w.insertBefore(fig, w.querySelector('.cur'));
+</script></body></html>

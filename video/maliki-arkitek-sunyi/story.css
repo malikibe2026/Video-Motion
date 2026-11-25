@@ -1,0 +1,184 @@
+/* Blueprint story look, shared by every scene. */
+@import url("fonts/kalam.css");
+@import url("fonts/ibm-plex-mono.css");
+@import url("fonts/archivo.css");
+
+:root {
+  --bg: #0d2a4f;
+  --bg-2: #15396a;
+  --fg: #eaf2ff;
+  --muted: #a9c0e0;
+  --accent: #f2c14e;
+  --accent-2: #ff7b6b;
+  --accent-ink: #f2c14e;
+  --coral: #ff8a7a;
+  --gold: #f2c14e;
+  --line: rgb(234 242 255 / 0.85);
+  --tint: transparent;
+  --hand: "Kalam", cursive;
+  --font: "Archivo Variable", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+}
+
+body { font-family: var(--hand); }
+
+/* Blueprint paper: base gradient, minor and major grid, chapter tint, vignette. */
+.bp {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(70% 70% at 50% 45%, transparent 55%, rgb(3 12 28 / 0.55) 100%),
+    linear-gradient(var(--tint), var(--tint)),
+    repeating-linear-gradient(0deg, rgb(234 242 255 / 0.10) 0 2px, transparent 2px 120px),
+    repeating-linear-gradient(90deg, rgb(234 242 255 / 0.10) 0 2px, transparent 2px 120px),
+    repeating-linear-gradient(0deg, rgb(234 242 255 / 0.045) 0 1px, transparent 1px 24px),
+    repeating-linear-gradient(90deg, rgb(234 242 255 / 0.045) 0 1px, transparent 1px 24px),
+    radial-gradient(90% 80% at 30% 20%, var(--bg-2), var(--bg));
+}
+.bp::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(40% 40% at var(--glow-x, 50%) var(--glow-y, 45%), var(--glow, transparent), transparent 70%);
+  animation: glow-breathe 6s ease-in-out infinite alternate;
+}
+@keyframes glow-breathe { from { opacity: 0.7; } to { opacity: 1; } }
+
+svg.world {
+
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.ink { fill: none; stroke: var(--line); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.ink.thin { stroke-width: 3; }
+.ink.faint { stroke: rgb(234 242 255 / 0.35); }
+.ink.gold { stroke: var(--gold); }
+.ink.coral { stroke: var(--coral); }
+.fillbg { fill: var(--bg); }
+.ground { stroke: rgb(234 242 255 / 0.5); stroke-width: 4; stroke-linecap: round; fill: none; }
+
+/* Narrative statement, handwritten. */
+.say {
+  position: absolute;
+  font-family: var(--hand);
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1.18;
+  color: var(--fg);
+  text-shadow: 0 2px 0 rgb(5 18 40 / 0.6), 0 0 24px rgb(5 18 40 / 0.7);
+  margin: 0;
+}
+.say.big { font-size: 76px; line-height: 1.08; }
+.say.small { font-size: 44px; }
+.say b { color: var(--gold); font-weight: 700; }
+.say em { color: var(--coral); font-style: normal; }
+.center-x { left: 0; right: 0; text-align: center; }
+
+/* Technical annotation labels. */
+.tag {
+  position: absolute;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 30px;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.tag.white { color: var(--fg); }
+.tag.coral { color: var(--coral); }
+
+/* Speech bubble in chalk. */
+.bub {
+  position: absolute;
+  padding: 14px 26px 16px;
+  border: 4px solid var(--line);
+  border-radius: 28px;
+  background: rgb(13 42 79 / 0.92);
+  font-family: var(--hand);
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 1.1;
+  color: var(--fg);
+  white-space: nowrap;
+}
+.bub.coral { border-color: var(--coral); color: var(--coral); }
+.bub.gold { border-color: var(--gold); color: var(--gold); }
+.bub::after {
+  content: "";
+  position: absolute;
+  left: var(--tail-x, 30px);
+  bottom: -22px;
+  width: 26px;
+  height: 26px;
+  background: inherit;
+  border-right: 4px solid currentColor;
+  border-bottom: 4px solid currentColor;
+  border-color: inherit;
+  transform: rotate(45deg) skew(10deg, 10deg);
+  transform-origin: center;
+}
+.bub.coral::after { border-color: var(--coral); }
+.bub.jag { border-radius: 8px; border-style: dashed; }
+
+/* Drawing title block, a blueprint convention. Texture only. */
+.titleblock {
+  position: absolute;
+  right: 96px;
+  bottom: 54px;
+  display: grid;
+  grid-template-columns: auto auto;
+  border: 2px solid rgb(234 242 255 / 0.4);
+  font-family: var(--mono);
+  font-size: 15px;
+  color: rgb(234 242 255 / 0.55);
+  letter-spacing: 0.08em;
+}
+.titleblock span { padding: 5px 12px; border: 1px solid rgb(234 242 255 / 0.25); }
+
+/* Chapter card. */
+.chap-no {
+  position: absolute;
+  left: 0; right: 0;
+  text-align: center;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 40px;
+  letter-spacing: 0.5em;
+  color: var(--gold);
+}
+.chap-title {
+  position: absolute;
+  left: 0; right: 0;
+  text-align: center;
+  font-family: var(--font);
+  font-weight: 800;
+  font-stretch: 85%;
+  font-size: 118px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--fg);
+  margin: 0;
+}
+.chap-sub {
+  position: absolute;
+  left: 0; right: 0;
+  text-align: center;
+  font-family: var(--hand);
+  font-weight: 400;
+  font-size: 46px;
+  color: var(--muted);
+}
+.wide { left: 150px; right: 150px; text-align: center; }
+.card-a { position: absolute; top: 290px; width: 380px; height: 470px; border: 3px solid rgb(234 242 255 / .55); border-radius: 18px; background: rgb(13 42 79 / .55); }
+.card-a .num { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font-family: var(--font); font-weight: 800; font-size: 120px; line-height: 1; color: var(--gold); }
+.card-a .lbl { position: absolute; left: 10px; right: 10px; top: 370px; text-align: center; font-family: var(--mono); font-weight: 600; font-size: 28px; line-height: 1.25; color: var(--fg); letter-spacing: .04em; }
+.appc { position: absolute; display: flex; align-items: center; gap: 18px; padding: 18px 26px; border: 3px solid var(--gold); border-radius: 18px; background: rgb(13 42 79 / .9); color: var(--fg); font-family: var(--hand); font-weight: 700; font-size: 40px; white-space: nowrap; }
+.appc i { font-size: 56px; color: var(--gold); --icon-stroke: 1.8; }
+@keyframes fly { from { opacity: 0; translate: var(--fx) var(--fy); scale: .2; } }
+.thk { position: absolute; padding: 18px 30px 20px; border: 4px solid var(--line); border-radius: 48px; background: rgb(13 42 79 / .92); font-family: var(--hand); font-weight: 700; font-size: 42px; color: var(--fg); white-space: nowrap; }
+.thk::before, .thk::after { content: ""; position: absolute; border: 4px solid var(--line); border-radius: 50%; background: rgb(13 42 79 / .92); }
+.thk::before { width: 28px; height: 28px; left: var(--tx, 60%); bottom: -40px; }
+.thk::after { width: 16px; height: 16px; left: calc(var(--tx, 60%) + var(--td, 30px)); bottom: -68px; }

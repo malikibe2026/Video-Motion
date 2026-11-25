@@ -1,0 +1,21 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style>
+  .rain { animation: rain .45s linear infinite; }
+  @keyframes rain { from { translate: 0 -50px } to { translate: -12px 50px } }
+</style></head><body>
+<div class="bp" style="--tint: rgb(0 8 20 / .35)"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <ellipse cx="960" cy="905" rx="300" ry="26" fill="rgb(234 242 255 / .06)"/>
+  <path class="ground" d="M520 900 H1400"/>
+  <path class="ink" d="M760 400 C 720 330, 820 280, 870 320 C 900 250, 1040 260, 1050 320 C 1120 300, 1180 380, 1130 420 Z" style="fill:var(--bg)"/>
+  <clipPath id="rc"><rect x="740" y="425" width="440" height="470"/></clipPath>
+  <g clip-path="url(#rc)"><g class="rain ink thin faint"><path d="M780 430 l-14 46 M840 450 l-14 46 M900 430 l-14 46 M960 455 l-14 46 M1020 432 l-14 46 M1080 452 l-14 46 M1140 436 l-14 46 M800 540 l-14 46 M860 560 l-14 46 M920 540 l-14 46 M980 565 l-14 46 M1040 545 l-14 46 M1100 560 l-14 46 M1160 540 l-14 46 M790 660 l-14 46 M850 680 l-14 46 M1110 660 l-14 46 M1170 680 l-14 46 M780 770 l-14 46 M1150 780 l-14 46"/></g></g>
+</svg>
+<p class="say wide m" style="top:110px; --in:rise; --t:-0.2s">Titik terendah dalam hidupnya.</p>
+<p class="say big wide m" style="top:190px; --in:blur; --t:3.0s">Dia rasa dia <em>tidak berfungsi</em>.</p>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>13 / 26</span></div>
+<script>
+Stick.add({ parent:'#w', x:960, y:900, s:2.4, color:'var(--gold)', face:'sad', keys:[[0,'floor']], lookX:3 });
+</script></body></html>

@@ -1,0 +1,113 @@
+{
+ "width": 1920,
+ "height": 1080,
+ "fps": 30,
+ "output": "out/maliki-arkitek-sunyi.mp4",
+ "sfx": false,
+ "scenes": [
+  {
+   "file": "scenes/01-tajuk.html",
+   "duration": 7
+  },
+  {
+   "file": "scenes/02-kenali.html",
+   "duration": 9
+  },
+  {
+   "file": "scenes/03-remuk.html",
+   "duration": 8
+  },
+  {
+   "file": "scenes/04-bab1.html",
+   "duration": 4
+  },
+  {
+   "file": "scenes/05-toksik.html",
+   "duration": 10
+  },
+  {
+   "file": "scenes/06-burnout.html",
+   "duration": 9
+  },
+  {
+   "file": "scenes/07-keajaiban.html",
+   "duration": 13
+  },
+  {
+   "file": "scenes/08-pergi.html",
+   "duration": 8
+  },
+  {
+   "file": "scenes/09-bab2.html",
+   "duration": 4
+  },
+  {
+   "file": "scenes/10-jarak.html",
+   "duration": 9
+  },
+  {
+   "file": "scenes/11-meja.html",
+   "duration": 10
+  },
+  {
+   "file": "scenes/12-mesyuarat.html",
+   "duration": 10
+  },
+  {
+   "file": "scenes/13-terendah.html",
+   "duration": 7
+  },
+  {
+   "file": "scenes/14-bab3.html",
+   "duration": 4
+  },
+  {
+   "file": "scenes/15-tabir.html",
+   "duration": 12
+  },
+  {
+   "file": "scenes/16-hermes.html",
+   "duration": 12
+  },
+  {
+   "file": "scenes/17-masjid.html",
+   "duration": 14
+  },
+  {
+   "file": "scenes/18-bab4.html",
+   "duration": 4
+  },
+  {
+   "file": "scenes/19-keraguan.html",
+   "duration": 12
+  },
+  {
+   "file": "scenes/20-kesedaran.html",
+   "duration": 13
+  },
+  {
+   "file": "scenes/21-bab5.html",
+   "duration": 4
+  },
+  {
+   "file": "scenes/22-lepaskan.html",
+   "duration": 10
+  },
+  {
+   "file": "scenes/23-keluarga.html",
+   "duration": 10
+  },
+  {
+   "file": "scenes/24-empayar.html",
+   "duration": 11
+  },
+  {
+   "file": "scenes/25-identiti.html",
+   "duration": 9
+  },
+  {
+   "file": "scenes/26-pesan.html",
+   "duration": 17
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style>
+  .lampglow { fill: var(--gold); opacity: .13; animation: flick 2.3s ease-in-out infinite alternate; }
+  @keyframes flick { 0% { opacity: .10 } 50% { opacity: .16 } 100% { opacity: .12 } }
+  .tt1 { position:absolute; left:1000px; top:330px; font-family:var(--font); font-weight:800; font-size:170px; line-height:1; letter-spacing:-.03em; margin:0; }
+  .tt2 { position:absolute; left:1006px; top:500px; font-family:var(--hand); font-weight:700; font-size:120px; line-height:1; color:var(--gold); margin:0; }
+  .tt3 { position:absolute; left:1008px; top:680px; font-size:46px; font-weight:400; color:var(--muted); }
+</style></head><body>
+<div class="bp" style="--glow: rgb(242 193 78 / .10); --glow-x:30%; --glow-y:60%"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <path class="ground" d="M120 900 H1800"/>
+  <!-- the building he imagines, drawn as a faint gold blueprint -->
+  <g class="ink gold thin" style="opacity:.7">
+    <path data-draw data-at="0.6" data-dur="1.6" d="M520 600 V420 H600 V600"/>
+    <path data-draw data-at="1.4" data-dur="1.8" d="M600 600 V330 L660 290 L720 330 V600"/>
+    <path data-draw data-at="2.4" data-dur="1.6" d="M720 600 V450 H820 V600"/>
+    <path data-draw data-at="3.2" data-dur="1.4" data-dash="6 10" d="M500 600 H840"/>
+    <path data-draw data-at="3.6" data-dur="2" data-dash="4 10" d="M540 450 H580 M540 500 H580 M630 370 H690 M630 430 H690 M630 490 H690 M740 490 H800 M740 540 H800"/>
+  </g>
+  <!-- stool -->
+  <g class="ink"><path d="M370 826 H490"/><path d="M390 826 L372 900 M470 826 L488 900"/></g>
+  <!-- drafting table and board -->
+  <g class="ink"><path d="M560 760 H850"/><path d="M585 760 V900 M830 760 V900"/><path d="M548 752 L850 690"/></g>
+  <!-- lamp -->
+  <polygon class="lampglow" points="790,560 740,560 560,750 850,690"/>
+  <g class="ink"><path d="M840 690 L880 560 L790 520"/><path d="M760 560 L790 510 L820 560 Z"/></g>
+</svg>
+<p class="tag m" style="left:1010px; top:250px; --in:fade; --t:-1s">LUKISAN 01 · KISAH SEORANG PEGAWAI</p>
+<h1 class="tt1 m" style="--in:rise; --t:-1s">Maliki</h1>
+<h2 class="tt2 m" style="--in:rise; --t:-1s">Arkitek Sunyi</h2>
+<p class="say tt3 m" style="--in:fade; --t:-1s">Kisah seorang pembina di belakang tabir.</p>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>01 / 26</span></div>
+<script>
+Stick.add({ parent:'#w', x:430, y:900, s:1.7, color:'var(--gold)', cls:'maliki', face:'neutral', keys:[[0,'sitType']], type:[[0.3,6.8]], lookX:7 });
+</script>
+</body></html>

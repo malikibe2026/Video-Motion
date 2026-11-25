@@ -1,0 +1,48 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style>
+  .phone-ui { position:absolute; left:160px; top:330px; width:330px; height:540px; border:4px solid var(--line); border-radius:40px; background:rgb(13 42 79 / .8); }
+  .phone-ui .hd { position:absolute; left:0; right:0; top:26px; text-align:center; font-family:var(--mono); font-weight:600; font-size:30px; color:var(--muted); }
+  .phone-ui .msg { position:absolute; right:18px; top:120px; max-width:280px; padding:14px 18px; border-radius:20px 20px 4px 20px; background:var(--gold); color:#13233d; font-family:var(--hand); font-weight:700; font-size:34px; line-height:1.15; }
+  .phone-ui .rep { position:absolute; left:18px; top:300px; max-width:280px; padding:14px 18px; border-radius:20px 20px 20px 4px; border:3px solid var(--line); color:var(--fg); font-family:var(--hand); font-weight:700; font-size:34px; line-height:1.15; }
+  .hub { position:absolute; left:780px; top:480px; width:260px; height:260px; border-radius:50%; border:6px solid var(--gold); display:grid; place-items:center; background:rgb(13 42 79 / .9); font-family:var(--font); font-weight:800; font-size:52px; color:var(--gold); letter-spacing:.02em; }
+  .ring { position:absolute; left:780px; top:480px; width:260px; height:260px; border-radius:50%; border:3px solid var(--gold); animation: ring 1.8s ease-out infinite; }
+  @keyframes ring { from { scale:1; opacity:.6 } to { scale:1.5; opacity:0 } }
+  .ag { position:absolute; left:1290px; display:flex; align-items:center; gap:22px; font-family:var(--mono); font-weight:600; font-size:34px; color:var(--fg); }
+  .ag .dot { width:80px; height:80px; border-radius:50%; border:4px solid var(--line); display:grid; place-items:center; font-size:44px; color:var(--gold); background:var(--bg); }
+  .ag .ok { color:#8fe3b0; font-size:40px; }
+</style></head><body>
+<div class="bp" style="--glow: rgb(242 193 78 / .12); --glow-x:47%; --glow-y:57%"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <path id="l0" class="ink gold thin" data-draw data-dash="10 10" data-at="2.2" data-dur="0.8" d="M495 600 C 600 600, 680 610, 778 610"/>
+  <path id="l1" class="ink thin stroke m" pathLength="1" style="--in:draw; --t:3.4s; --in-dur:0.6s" d="M1040 610 C 1150 610, 1200 360, 1290 360"/>
+  <path id="l2" class="ink thin stroke m" pathLength="1" style="--in:draw; --t:3.6s; --in-dur:0.6s" d="M1040 610 C 1150 610, 1200 485, 1290 485"/>
+  <path id="l3" class="ink thin stroke m" pathLength="1" style="--in:draw; --t:3.8s; --in-dur:0.6s" d="M1040 610 C 1150 610, 1200 610, 1290 610"/>
+  <path id="l4" class="ink thin stroke m" pathLength="1" style="--in:draw; --t:4.0s; --in-dur:0.6s" d="M1040 610 C 1150 610, 1200 735, 1290 735"/>
+  <path id="l5" class="ink thin stroke m" pathLength="1" style="--in:draw; --t:4.2s; --in-dur:0.6s" d="M1040 610 C 1150 610, 1200 860, 1290 860"/>
+  <g id="pulses"></g>
+</svg>
+<div class="phone-ui m" style="--in:left; --t:-0.3s"><div class="hd">Telegram</div>
+  <div class="msg m" style="--in:pop; --t:0.8s">Hermes, siapkan laporan.</div>
+  <div class="rep m" style="--in:pop; --t:8.2s">Siap <i data-icon="check"></i></div></div>
+
+<div class="hub m" style="--in:pop; --t:2.6s">HERMES</div>
+<div class="ag m" style="top:320px; --in:right; --t:3.6s"><span class="dot"><i data-icon="bot"></i></span>Maliki Admin <span class="ok m" style="--in:pop; --t:6.4s"><i data-icon="check"></i></span></div>
+<div class="ag m" style="top:445px; --in:right; --t:3.8s"><span class="dot"><i data-icon="bot"></i></span>Data <span class="ok m" style="--in:pop; --t:6.8s"><i data-icon="check"></i></span></div>
+<div class="ag m" style="top:570px; --in:right; --t:4.0s"><span class="dot"><i data-icon="bot"></i></span>Browser <span class="ok m" style="--in:pop; --t:7.2s"><i data-icon="check"></i></span></div>
+<div class="ag m" style="top:695px; --in:right; --t:4.2s"><span class="dot"><i data-icon="bot"></i></span>Studio <span class="ok m" style="--in:pop; --t:7.6s"><i data-icon="check"></i></span></div>
+<div class="ag m" style="top:820px; --in:right; --t:4.4s"><span class="dot"><i data-icon="bot"></i></span>Operasi <span class="ok m" style="--in:pop; --t:8.0s"><i data-icon="check"></i></span></div>
+<p class="say wide m" style="top:110px; --in:rise; --t:-0.2s">Lebih hebat — dia mencipta <b>Hermes</b>.</p>
+<p class="say wide m" style="top:195px; --in:rise; --t:4.6s">AI dengan <b>5 ejen peribadi</b>, dikawal melalui Telegram.</p>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>16 / 26</span></div>
+<script>
+const pg = document.querySelector('#pulses');
+const paths = [1,2,3,4,5].map(i => document.querySelector('#l'+i)); const l0 = document.querySelector('#l0');
+const dots = Array.from({length:10}, (_,i) => Stick.el('circle', { r: 9, fill: 'var(--gold)' }, pg));
+__video.on(ms => { const t = ms/1000; dots.forEach((d,i) => {
+  const path = i < 5 ? paths[i] : l0; const start = i < 5 ? 4.8 + i*0.15 : 3.0 + (i-5)*0.5;
+  const ph = (((t - start) / 1.4) % 1 + 1) % 1; const on = t > start;
+  const L = path.getTotalLength(); const p = path.getPointAtLength(L*ph);
+  d.setAttribute('cx', p.x.toFixed(1)); d.setAttribute('cy', p.y.toFixed(1)); d.style.opacity = on ? Math.sin(ph*Math.PI).toFixed(3) : 0; }); });
+</script></body></html>

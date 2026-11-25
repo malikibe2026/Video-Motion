@@ -1,0 +1,31 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style></style></head><body>
+<div class="bp" style="--tint: rgb(255 110 90 / .08); --glow: rgb(255 110 90 / .10); --glow-x:80%"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <path class="ground" d="M80 900 H1840"/>
+  <g class="ink"><path d="M970 762 H1250"/><path d="M995 762 V900 M1225 762 V900"/><path d="M845 828 H955 M860 828 L846 900 M940 828 L954 900"/></g>
+  <g id="papers" class="ink thin"></g>
+</svg>
+<p class="say wide m" style="top:110px; --in:rise; --t:-0.2s; --out:sink-out; --out-t:4.6s">Dipaksa masuk unit <em>toksik</em> di Selangor — menggantikan orang yang lari.</p>
+<p class="say wide m" style="top:110px; --in:rise; --t:5.0s">Ketua Unit Gred 10 yang suka <em>membuli</em>.</p>
+<div class="tag coral m" style="left:1330px; top:330px; --in:fade; --t:5.4s">KETUA UNIT · GRED 10</div>
+<div class="bub coral jag m" style="left:1250px; top:420px; --in:pop; --t:5.8s; --tail-x:60px">!!!</div>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>05 / 26</span></div>
+<script>
+Stick.add({ parent:'#w', x:900, y:900, s:1.6, op:[[0,0.75]], seed:2, face:'worried',
+  keys:[[0,'sit'],[0.5,'stand',0.3],[0.8,'run',0.3]], dirKeys:[[0,1],[0.5,-1]],
+  move:[[0.8,[900,900]],[2.6,[-200,900],t=>t]], walk:[[0.8,2.6,true]] });
+Stick.add({ parent:'#w', x:-200, y:900, s:1.6, color:'var(--gold)', cls:'maliki', face:'neutral',
+  move:[[2.3,[-200,900]],[4.4,[900,900],t=>t]], walk:[[2.3,4.4]],
+  keys:[[0,'stand'],[4.4,'stand'],[4.9,'sit',0.5],[5.4,'sitType',0.4]], type:[[5.6,10]], faceKeys:[[0,'neutral'],[6,'worried']] });
+Stick.add({ parent:'#w', x:1560, y:900, s:2.3, dir:-1, color:'var(--coral)', draw:4.6, face:'shout', sw:8, seed:1,
+  keys:[[0,'stand'],[5.2,'stand'],[5.5,'yell',0.3],[7,'yell'],[7.3,'point',0.3]], shake:[[5.6,6.6,4]] });
+const pg = document.querySelector('#papers');
+const sheets = Array.from({length:9}, (_,i) => Stick.el('rect', { x:1050, y:0, width:150, height:12, rx:2, class:'ink thin', fill:'var(--bg)' }, pg));
+__video.on(ms => { const t = ms/1000; sheets.forEach((r,i) => {
+  const t0 = 6.0 + i*0.42, k = Stick.clamp((t - t0)/0.45);
+  const y = Stick.lerp(560, 748 - i*13, Stick.easeOut(k)); r.setAttribute('y', y.toFixed(1));
+  r.setAttribute('x', (1050 + ((i*37)%20) - 10).toFixed(1)); r.style.opacity = k > 0 ? 1 : 0; }); });
+</script></body></html>

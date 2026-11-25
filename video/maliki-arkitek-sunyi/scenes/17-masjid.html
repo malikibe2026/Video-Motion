@@ -1,0 +1,45 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style>
+  .bub.s { font-size:34px; padding:10px 20px 12px; }
+  .office { position:absolute; left:1070px; top:220px; width:720px; height:118px; border:3px dashed rgb(234 242 255 / .5); border-radius:16px; display:flex; align-items:center; gap:18px; padding:0 22px; font-family:var(--mono); font-weight:600; font-size:28px; color:var(--muted); }
+  .office .b { position:relative; font-size:56px; color:var(--fg); }
+  .office .b .c { position:absolute; right:-14px; bottom:-8px; font-size:32px; color:#8fe3b0; }
+</style></head><body>
+<div class="bp" style="--glow: rgb(242 193 78 / .10); --glow-x:76%; --glow-y:70%"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <path class="ink faint thin" d="M960 230 V880" stroke-dasharray="10 12"/>
+  <path class="ground" d="M100 880 H900 M1020 880 H1820"/>
+  <g id="left"></g>
+  <g class="ink" style="opacity:.75"><rect x="160" y="752" width="620" height="34" rx="6" fill="var(--bg)"/><path d="M190 786 V880 M750 786 V880"/></g>
+  <g class="ink" style="opacity:.55">
+    <path d="M1150 880 V600 H1700 V880"/><path d="M1260 600 A 165 165 0 0 1 1590 600"/><path d="M1425 435 V405 M1412 418 H1438"/>
+    <path d="M1745 880 V470 H1790 V880 M1745 470 L1767 420 L1790 470"/><path d="M1385 880 V770 A 40 40 0 0 1 1465 770 V880" />
+  </g>
+  <g id="right"></g>
+</svg>
+<p class="say m" style="left:80px; width:840px; top:110px; text-align:center; font-size:50px; --in:rise; --t:-0.2s">Mereka berdebat tentang <em>teori AI</em>.</p>
+<p class="say m" style="left:1000px; width:840px; top:110px; text-align:center; font-size:50px; --in:rise; --t:1.4s">Maliki solat <b>Jumaat</b>.</p>
+<div class="office m" style="--in:rise; --t:3.4s">PEJABAT
+  <span class="b"><i data-icon="bot"></i><span class="c m" style="--in:pop; --t:5.0s"><i data-icon="check"></i></span></span>
+  <span class="b"><i data-icon="bot"></i><span class="c m" style="--in:pop; --t:5.8s"><i data-icon="check"></i></span></span>
+  <span class="b"><i data-icon="bot"></i><span class="c m" style="--in:pop; --t:6.6s"><i data-icon="check"></i></span></span>
+  <span class="b"><i data-icon="bot"></i><span class="c m" style="--in:pop; --t:7.4s"><i data-icon="check"></i></span></span>
+  <span class="b"><i data-icon="bot"></i><span class="c m" style="--in:pop; --t:8.2s"><i data-icon="check"></i></span></span>
+</div>
+<div class="bub s m" style="left:160px; top:430px; --in:pop; --t:0.6s; --out:fade-out; --out-t:2.6s">Teori AI…</div>
+<div class="bub s m" style="left:470px; top:410px; --in:pop; --t:2.0s; --out:fade-out; --out-t:4.2s">Tapi AI akan…</div>
+<div class="bub s coral m" style="left:620px; top:450px; --in:pop; --t:3.8s; --out:fade-out; --out-t:5.8s">Bahaya!</div>
+<div class="bub s m" style="left:190px; top:430px; --in:pop; --t:5.6s; --out:fade-out; --out-t:7.8s">Kita kaji dulu…</div>
+<div class="bub s m" style="left:470px; top:410px; --in:pop; --t:7.6s; --out:fade-out; --out-t:9.6s">Bla bla bla…</div>
+<p class="say wide m" style="top:905px; --in:rise; --t:9.0s">Sementara 5 ejen AI-nya <b>menyiapkan kerja</b> di pejabat.</p>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>17 / 26</span></div>
+<script>
+[[260,1,0],[470,-1,1],[640,-1,2]].forEach(([x,d,i]) => Stick.add({ parent:'#left', x, y:880, s:1.35, dir:d, face:'shout', seed:i,
+  keys:[[0,'sit'],[0.4+i*1.6,'sit'],[0.7+i*1.6,'sitTalk',0.3],[1.6+i*1.6,'sit',0.3],[5.4+i*1.6,'sit'],[5.7+i*1.6,'sitTalk',0.3],[6.6+i*1.6,'sit',0.3]],
+  faceKeys:[[0,'smile'],[1+i,'shout'],[3+i,'neutral'],[6+i,'shout']] }));
+const cyc = [[0,'pray'],[2.4,'pray'],[3.0,'ruku',0.6],[4.4,'ruku'],[5.0,'stand',0.5],[5.8,'stand'],[6.6,'sujud',0.8],[8.0,'sujud'],[8.6,'tahiyat',0.6],[9.4,'tahiyat'],[10.2,'sujud',0.8],[11.6,'sujud'],[12.3,'tahiyat',0.7]];
+[[1270,0],[1440,1],[1610,2]].forEach(([x,i]) => Stick.add({ parent:'#right', x, y:880, s:1.25, face:'neutral', seed:i, idle:false,
+  color: i === 1 ? 'var(--gold)' : 'rgb(234 242 255 / .6)', keys: cyc }));
+</script></body></html>

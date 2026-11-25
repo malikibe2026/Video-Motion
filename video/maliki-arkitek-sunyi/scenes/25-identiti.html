@@ -1,0 +1,22 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style>.orb { position:absolute; width:76px; height:76px; border-radius:50%; border:4px solid var(--gold); background:var(--bg); display:grid; place-items:center; font-size:40px; color:var(--gold); transform: translate(-50%,-50%); }</style></head><body>
+<div class="bp" style="--glow: rgb(242 193 78 / .16); --glow-x:50%; --glow-y:62%"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <ellipse cx="960" cy="660" rx="330" ry="150" class="ink gold thin" style="opacity:.35" stroke-dasharray="8 12"/>
+  <path class="ground" d="M640 930 H1280"/>
+</svg>
+<div class="orb" id="o0"><i data-icon="bot"></i></div><div class="orb" id="o1"><i data-icon="bot"></i></div><div class="orb" id="o2"><i data-icon="bot"></i></div><div class="orb" id="o3"><i data-icon="bot"></i></div><div class="orb" id="o4"><i data-icon="bot"></i></div>
+<p class="say big wide m" style="top:100px; --in:rise; --t:-0.2s">Dia adalah <b>Maliki</b> —</p>
+<p class="say wide m" style="top:200px; --in:rise; --t:1.6s">pembina sunyi yang memegang <b>kawalan sebenar</b> di sebalik tabir teknologi.</p>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>25 / 26</span></div>
+<script>
+const f = Stick.add({ parent:'#w', x:960, y:930, s:2.0, color:'var(--gold)', face:'smile', keys:[[0,'holdOut']],
+  extra:(g, el) => { const ph = el('rect', { width:30, height:50, rx:6, fill:'var(--bg)', stroke:'currentColor', 'stroke-width':5 }, g);
+    return (j) => { ph.setAttribute('x', (j.handF[0]-10).toFixed(1)); ph.setAttribute('y', (j.handF[1]-48).toFixed(1)); }; } });
+const orbs = [0,1,2,3,4].map(i => document.querySelector('#o'+i));
+__video.on(ms => { const t = ms/1000; orbs.forEach((o,i) => {
+  const a = t*0.5 + i*(Math.PI*2/5); const x = 960 + Math.cos(a)*330, y = 660 + Math.sin(a)*150;
+  o.style.left = x + 'px'; o.style.top = y + 'px'; o.style.zIndex = Math.sin(a) > 0 ? 2 : 0; o.style.opacity = Stick.clamp((t - 0.2 - i*0.2)/0.4); }); });
+</script></body></html>

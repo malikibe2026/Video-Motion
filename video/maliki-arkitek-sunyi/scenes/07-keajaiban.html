@@ -1,0 +1,34 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style>
+  .card-a .vis { position:absolute; left:0; right:0; top:20px; height:200px; display:flex; justify-content:center; align-items:center; gap:20px; color:var(--gold); }
+  .medal { font-size:120px; --icon-stroke:1.6; display:inline-block; transform-origin: 50% 0; animation: swing 1.6s ease-in-out infinite alternate; }
+  @keyframes swing { from { rotate: -9deg } to { rotate: 9deg } }
+  .ticks { display:flex; gap:18px; }
+  .ticks span { width:84px; height:84px; border:4px solid var(--gold); border-radius:50%; display:grid; place-items:center; font-size:54px; }
+</style></head><body>
+<div class="bp" style="--glow: rgb(242 193 78 / .12)"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080"></svg>
+<p class="say wide m" style="top:100px; --in:rise; --t:-0.2s">Namun dalam sunyi, dia lakukan <b>keajaiban</b>.</p>
+<div class="card-a m" style="left:120px; --in:rise; --t:0.2s"><div class="num"><span data-count="14" data-at="0.6" data-dur="1.8">0</span></div><div class="lbl">STAF DIURUS</div></div>
+<div class="card-a m" style="left:560px; --in:rise; --t:3.2s"><div class="vis"><svg width="220" height="190" viewBox="0 0 220 190" id="box"><path class="ink gold" d="M30 80 H190 V180 H30 Z M80 80 V70 H140 V80"/><path class="ink gold thin" d="M70 110 H150"/></svg></div><div class="num"><span data-count="96" data-at="3.6" data-dur="2.2">0</span></div><div class="lbl">UNDI · KETUA BIRO</div></div>
+<div class="card-a m" style="left:1000px; --in:rise; --t:5.4s"><div class="vis"><div class="ticks"><span class="m" style="--in:pop; --t:5.9s"><i data-icon="check"></i></span><span class="m" style="--in:pop; --t:6.3s"><i data-icon="check"></i></span><span class="m" style="--in:pop; --t:6.7s"><i data-icon="check"></i></span></div></div><div class="num">3</div><div class="lbl">PENGGAL KETUA BIRO</div></div>
+<div class="card-a m" style="left:1440px; --in:rise; --t:7.6s"><div class="vis"><span class="medal m" style="--in:pop; --t:8.0s"><i data-icon="medal"></i></span><span class="medal m" style="--in:pop; --t:8.3s; animation-delay:.4s"><i data-icon="medal"></i></span></div><div class="num">2</div><div class="lbl">EMAS · BALAPAN<br>ZON TENGAH</div></div>
+<p class="say wide m" style="top:850px; --in:rise; --t:9.8s">Semuanya dilakukan dalam <b>diam</b>.</p>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>07 / 26</span></div>
+<script>
+// 14 mini staff inside card 1
+const w = document.querySelector('#w');
+for (let i = 0; i < 14; i++) {
+  const r = Math.floor(i/7), c = i%7;
+  Stick.add({ parent: w, x: 160 + c*50, y: 410 + r*100, s: 0.36, sw: 9, draw: 0.5 + i*0.09, drawDur: 0.5, seed: i, face: 'smile',
+    color: i === 0 ? 'var(--gold)' : 'var(--fg)', keys: [[0, 'stand'], [3 + i*0.05, 'stand'], [3.4 + i*0.05, 'cheer', 0.4]], idle: true });
+}
+// votes dropping into the ballot box
+const box = document.querySelector('#box');
+const slips = Array.from({length: 6}, () => Stick.el('rect', { x: 95, width: 30, height: 18, rx: 2, fill: 'var(--fg)' }, box));
+__video.on(ms => { const t = ms/1000; slips.forEach((r, i) => {
+  const ph = ((t - 3.6 - i*0.35) % 2.1 + 2.1) % 2.1, on = t > 3.6 + i*0.35 && t < 6.2 + i*0.35;
+  const k = Stick.clamp(ph/0.6); r.setAttribute('y', (Stick.lerp(-10, 72, k)).toFixed(1)); r.style.opacity = on && k < 1 ? 1 : 0; }); });
+</script></body></html>

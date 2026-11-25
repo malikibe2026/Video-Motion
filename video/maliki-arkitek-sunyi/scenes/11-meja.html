@@ -1,0 +1,31 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style></style></head><body>
+<div class="bp" style="--tint: rgb(150 160 180 / .10)"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <path class="ground" d="M80 900 H1840"/>
+  <g class="ink"><path d="M490 762 H770"/><path d="M515 762 V900 M745 762 V900"/><path d="M365 828 H475 M380 828 L366 900 M460 828 L474 900"/></g>
+  <g class="ink faint"><path d="M1240 762 H1600 M1265 762 V900 M1575 762 V900"/></g>
+  <g id="stA" class="ink thin"></g><g id="stB" class="ink thin"></g>
+</svg>
+<p class="say wide m" style="top:110px; --in:rise; --t:-0.2s">Orang lama masih memanggilnya <em>“budak Gred 1”</em>.</p>
+<p class="say wide m" style="top:195px; --in:rise; --t:5.4s">Diabaikan di meja terbuka. Beban kerja <em>tidak adil</em>.</p>
+<div class="bub m" style="left:1270px; top:440px; --in:pop; --t:0.4s; --out:fade-out; --out-t:1.6s; font-size:36px">haha</div>
+<div class="bub m" style="left:1500px; top:420px; --in:pop; --t:1.2s; --out:fade-out; --out-t:2.4s; font-size:36px">hehe</div>
+<div class="bub coral m" style="left:820px; top:450px; --in:pop; --t:3.2s; --out:fade-out; --out-t:5.0s; --tail-x:200px">Budak Gred 1…</div>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>11 / 26</span></div>
+<script>
+Stick.add({ parent:'#w', x:420, y:900, s:1.6, color:'var(--gold)', face:'neutral', keys:[[0,'sitType'],[3.3,'sitType'],[3.6,'sit',0.3],[5.4,'sit'],[5.8,'sitType',0.4]], type:[[0,3.3],[5.9,10]], faceKeys:[[0,'neutral'],[3.4,'sad']] });
+[[1300,-1,'smile',0],[1420,1,'happy',1],[1550,-1,'smile',2]].forEach(([x,d,f,i]) => Stick.add({ parent:'#w', x, y:900, s:1.5, dir:d, face:f, seed:i+4,
+  keys:[[0,'stand'],[0.3+i*0.6,'stand'],[0.6+i*0.6,'shrug',0.3],[1.2+i*0.6,'stand',0.3]] }));
+Stick.add({ parent:'#w', x:2100, y:900, s:1.55, dir:-1, face:'smile', seed:9,
+  move:[[1.2,[2100,900]],[3.0,[1000,900],t=>t],[5.2,[1000,900]],[7.2,[2150,900],t=>t]], walk:[[1.2,3.0],[5.2,7.2]],
+  keys:[[0,'stand'],[3.0,'stand'],[3.3,'point',0.3],[4.9,'point'],[5.2,'stand',0.3]], dirKeys:[[0,-1],[5.1,1]] });
+const stA = document.querySelector('#stA'), stB = document.querySelector('#stB');
+const a = Array.from({length:11}, (_,i) => Stick.el('rect', { x: 580 + ((i*31)%16)-8, y: 748 - i*13, width:150, height:12, rx:2, class:'ink thin', fill:'var(--bg)' }, stA));
+const b = [Stick.el('rect', { x: 1360, y: 748, width:150, height:12, rx:2, class:'ink thin faint', fill:'var(--bg)' }, stB)];
+__video.on(ms => { const t = ms/1000;
+  a.forEach((r,i) => { const k = Stick.clamp((t - 6.0 - i*0.25)/0.35); r.style.opacity = k; r.setAttribute('transform', `translate(0 ${((1-Stick.easeOut(k))*-80).toFixed(1)})`); });
+  b.forEach(r => { const k = Stick.clamp((t - 6.2)/0.35); r.style.opacity = k; }); });
+</script></body></html>

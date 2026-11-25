@@ -1,0 +1,24 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style>.spot { fill: var(--gold); opacity: .13; }</style></head><body>
+<div class="bp" style="--tint: rgb(150 120 220 / .08)"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <path class="ground" d="M120 860 H1800"/>
+  <g class="m" style="--in:fade; --t:5.0s"><polygon class="spot" points="1440,240 1470,240 1640,860 1270,860"/><path class="ink" d="M1180 860 V820 H1720 V860"/><path class="ink thin" d="M1420 250 H1490 L1470 230 H1440 Z"/></g>
+</svg>
+<div class="thk m" style="left:150px; top:300px; --in:pop; --t:0.5s; --tx:70%; --td:20px">Patut aku berhenti kerja?</div>
+<div class="thk m" style="left:700px; top:250px; --in:pop; --t:2.0s; --tx:10%; --td:-30px">Aku ni slow learner ke?</div>
+<div class="tag m" style="left:780px; top:375px; --in:fade; --t:2.4s">KURSUS SAS</div>
+<div class="thk m" style="left:120px; top:470px; --in:pop; --t:3.6s; --tx:80%; --td:24px">Dulu dapat 6A SPM…</div>
+<div class="bub m" style="left:1290px; top:330px; --in:pop; --t:5.8s; font-size:36px">Bla bla bla!</div>
+<div class="tag white m" style="left:1300px; top:870px; --in:fade; --t:5.6s">STAF BARU · PETAH</div>
+<p class="say wide m" style="top:930px; --in:rise; --t:7.4s">Dia rasa lambat. Rasa kalah dengan yang <em>pandai bercakap</em>.</p>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>19 / 26</span></div>
+<script>
+Stick.add({ parent:'#w', x:640, y:860, s:1.8, color:'var(--gold)', face:'worried', keys:[[0,'think'],[3.4,'think'],[3.8,'standSad',0.4],[5.6,'standSad'],[6.0,'stand',0.4]], dirKeys:[[0,1]], faceKeys:[[0,'worried'],[7.4,'sad']] });
+Stick.add({ parent:'#w', x:1450, y:820, s:1.5, face:'happy', draw:5.0, keys:[[0,'stand'],[5.6,'wave',0.4],[6.6,'point',0.4],[7.6,'cheer',0.4],[8.6,'wave',0.4],[9.6,'point',0.4]], dirKeys:[[0,-1]] });
+Stick.add({ parent:'#w', x:1760, y:860, s:1.55, dir:-1, face:'happy', draw:6.2, keys:[[0,'stand'],[7.0,'cheer',0.4],[8.0,'stand',0.4],[8.8,'cheer',0.4]],
+  extra:(g, el) => { const tie = el('path', { fill:'none', stroke:'currentColor', 'stroke-width':4, 'stroke-linejoin':'round' }, g);
+    return (j, ms) => { tie.style.opacity = ms > 6900 ? 1 : 0; const x = j.sh[0], y = j.sh[1]; tie.setAttribute('d', `M${x-6} ${y+6} L${x} ${y+12} L${x+6} ${y+6} M${x} ${y+12} L${x-5} ${y+46} L${x} ${y+54} L${x+5} ${y+46} Z`); }; } });
+</script></body></html>

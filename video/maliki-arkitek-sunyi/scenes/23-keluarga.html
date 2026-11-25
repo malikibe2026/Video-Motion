@@ -1,0 +1,25 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style></style></head><body>
+<div class="bp" style="--tint: rgb(255 190 120 / .08); --glow: rgb(255 190 120 / .16); --glow-x:80%; --glow-y:55%"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <circle cx="1560" cy="560" r="110" class="ink gold" style="opacity:.6"/>
+  <path class="ground" d="M80 880 H1840"/>
+  <g class="ink"><path d="M1400 880 V650 L1530 560 L1660 650 V880"/><path d="M1500 880 V780 H1560 V880"/><path d="M1430 700 h44 v44 h-44 z"/></g>
+  <path id="hrt" d="M0 12 C -26 -6, -16 -30, 0 -14 C 16 -30, 26 -6, 0 12 Z" fill="var(--gold)"/>
+</svg>
+<p class="say wide m" style="top:110px; --in:rise; --t:-0.2s">Dia memilih untuk fokus pada <b>isteri</b> dan <b>anaknya</b>.</p>
+<p class="say wide m" style="top:195px; --in:rise; --t:4.6s">Dan pada <b>ketenangan hatinya</b>.</p>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>23 / 26</span></div>
+<script>
+const walk = (x0, x1) => ({ move:[[0.3,[x0,880]],[5.6,[x1,880],t=>t]], walk:[[0.3,5.6]] });
+const tudung = (g, el) => { const p = el('path', { fill:'none', stroke:'currentColor', 'stroke-width':6, 'stroke-linejoin':'round', 'stroke-linecap':'round' }, g);
+  return (j) => { const [x,y] = j.head, r = 21*j.s + 8, d = j.dir; p.setAttribute('d', `M${x - d*r*0.2} ${y + r} A ${r} ${r} 0 1 ${d>0?1:0} ${x + d*r*0.75} ${y + r*0.55} L ${x + d*r*0.3} ${y + r*1.5} M${x - d*r*0.9} ${y + r*0.4} L ${x - d*r*1.1} ${y + r*1.7}`); }; };
+Stick.add({ parent:'#w', x:200, y:880, s:1.6, face:'smile', extra:tudung, seed:2, ...walk(140, 760), keys:[[0,'stand'],[5.6,'stand'],[6.0,'holdOut',0.4]] });
+Stick.add({ parent:'#w', x:400, y:880, s:1.7, color:'var(--gold)', face:'happy', ...walk(330, 960), keys:[[0,'stand'],[5.6,'stand'],[6.0,'proud',0.4]] });
+Stick.add({ parent:'#w', x:560, y:880, s:1.0, face:'happy', seed:4, ...walk(500, 1130), keys:[[0,'stand'],[5.6,'stand'],[5.9,'cheer',0.3],[6.6,'stand',0.3],[7.0,'cheer',0.3],[7.7,'stand',0.3],[8.1,'cheer',0.3]] });
+const hrt = document.querySelector('#hrt');
+__video.on(ms => { const t = ms/1000; const k = Stick.easeOut(Stick.clamp((t - 6.2)/0.6)); const p = 1 + Math.sin(t*5)*0.05;
+  hrt.setAttribute('transform', `translate(880 470) scale(${(2.2*k*p).toFixed(3)})`); hrt.style.opacity = k; });
+</script></body></html>

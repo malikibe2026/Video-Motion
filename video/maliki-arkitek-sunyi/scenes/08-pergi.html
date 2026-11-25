@@ -1,0 +1,28 @@
+<!doctype html><html lang="ms"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../base.css"><link rel="stylesheet" href="../story.css">
+<script src="../icons.js"></script><script src="../motion.js"></script><script src="../stick.js"></script>
+<style>
+  .rain { animation: rain .5s linear infinite; }
+  @keyframes rain { from { translate: 0 -40px } to { translate: -10px 40px } }
+  .bolt { opacity: 0; animation: bolt 2.6s steps(1) 1.2s infinite; }
+  @keyframes bolt { 0% { opacity: 1 } 6% { opacity: 0 } 100% { opacity: 0 } }
+</style></head><body>
+<div class="bp" style="--tint: rgb(255 110 90 / .06); --glow: rgb(242 193 78 / .10); --glow-x:85%; --glow-y:70%"></div>
+<svg class="world" id="w" viewBox="0 0 1920 1080">
+  <path class="ground" d="M80 900 H1840"/>
+  <g class="ink coral" style="opacity:.85"><path d="M140 900 V440 H470 V900"/><path d="M190 500 h50 M280 500 h50 M370 500 h50 M190 580 h50 M280 580 h50 M370 580 h50 M190 660 h50 M280 660 h50 M370 660 h50"/><path d="M380 900 V790 H450 V900"/><path d="M300 440 L320 520 L290 600 L330 700" class="thin"/></g>
+  <path class="ink" d="M150 360 C 120 300, 200 260, 240 290 C 270 230, 380 240, 390 290 C 450 270, 500 330, 460 370 Z" style="fill:var(--bg)"/>
+  <clipPath id="rc"><rect x="130" y="370" width="380" height="530"/></clipPath>
+  <g clip-path="url(#rc)"><g class="rain ink thin faint"><path d="M170 380 l-12 40 M220 400 l-12 40 M270 380 l-12 40 M320 410 l-12 40 M370 385 l-12 40 M420 405 l-12 40 M195 470 l-12 40 M245 490 l-12 40 M295 470 l-12 40 M345 500 l-12 40 M395 475 l-12 40 M445 495 l-12 40"/></g></g>
+  <path class="bolt" d="M330 360 L300 430 H330 L305 500" fill="none" stroke="var(--gold)" stroke-width="6" stroke-linejoin="round"/>
+  <path class="ink faint thin" data-draw data-dash="14 16" data-at="1.0" data-dur="6" d="M460 930 H1760"/>
+  <circle cx="1680" cy="520" r="70" class="ink gold thin" style="opacity:.7"/>
+</svg>
+<p class="say wide m" style="top:110px; --in:rise; --t:-0.2s">Tetapi dia sedar —</p>
+<p class="say wide m" style="top:195px; --in:rise; --t:1.6s">dia perlu pergi untuk <b>selamatkan nyawanya</b>.</p>
+<div class="titleblock" data-texture><span>PROJEK</span><span>MALIKI</span><span>LUKISAN</span><span>08 / 26</span></div>
+<script>
+Stick.add({ parent:'#w', x:415, y:900, s:1.6, color:'var(--gold)', face:'worried',
+  keys:[[0,'standSad'],[1.2,'standSad'],[1.6,'stand',0.4]], faceKeys:[[0,'worried'],[3,'neutral']],
+  move:[[1.4,[415,900]],[7.8,[1500,900],t=>t]], walk:[[1.4,7.8]] });
+</script></body></html>
