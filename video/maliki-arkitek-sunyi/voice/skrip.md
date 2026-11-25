@@ -16,12 +16,12 @@ Satu klip setiap babak: voice/NN.mp3. Status: [x] siap, [ ] belum.
 - [x] 11 Orang lama masih memanggilnya, budak Gred satu. Dia diabaikan di meja terbuka, dan diberi beban kerja yang tidak adil.
 - [x] 12 Dalam mesyuarat, dia dipandang kosong kerana tidak pandai bercakap. Pengarah yang dulu membantunya, kini menganggapnya sekadar orang yang layak membaca doa.
 - [x] 13 Itulah titik terendah dalam hidupnya. Dia rasa... dia tidak berfungsi.
-- [ ] 14 Bab tiga. Rahsia di sebalik tabir.
-- [ ] 15 Apa yang mereka tidak tahu... Maliki seorang genius teknologi yang belajar sendiri. Di meja kerjanya yang sunyi, dia telah membina empat sistem aplikasi. Direktori Dozem, Jadual Solat, Muslim Smart Kids, dan WorldStat Atlas.
-- [ ] 16 Lebih hebat lagi, dia mencipta Hermes. Sebuah sistem A I dengan lima ejen peribadi: Maliki Admin, Data, Browser, Studio, dan Operasi. Semuanya dikawal melalui Telegram.
-- [ ] 17 Ketika orang lain sibuk berdebat tentang teori A I dalam mesyuarat, Maliki duduk di masjid, menunaikan solat Jumaat... sementara lima ejen A I nya menyiapkan kerja di pejabat.
-- [ ] 18 Bab empat. Konflik batin.
-- [ ] 19 Maliki sering terfikir untuk berhenti kerja. Dia rasa dirinya lambat faham dalam kursus S A S, walaupun dulu dia mendapat enam A dalam S P M. Dia rasa tercabar melihat staf baru yang pandai bercakap, dan disayangi bos.
+- [x] 14 Bab tiga. Rahsia di sebalik tabir.
+- [x] 15 Apa yang mereka tidak tahu... Maliki seorang genius teknologi yang belajar sendiri. Di meja kerjanya yang sunyi, dia telah membina empat sistem aplikasi. Direktori Dozem, Jadual Solat, Muslim Smart Kids, dan WorldStat Atlas.
+- [x] 16 Lebih hebat lagi, dia mencipta Hermes. Sebuah sistem A I dengan lima ejen peribadi: Maliki Admin, Data, Browser, Studio, dan Operasi. Semuanya dikawal melalui Telegram.
+- [x] 17 Ketika orang lain sibuk berdebat tentang teori A I dalam mesyuarat, Maliki duduk di masjid, menunaikan solat Jumaat... sementara lima ejen A I nya menyiapkan kerja di pejabat.
+- [x] 18 Bab empat. Konflik batin.
+- [x] 19 Maliki sering terfikir untuk berhenti kerja. Dia rasa dirinya lambat faham dalam kursus S A S, walaupun dulu dia mendapat enam A dalam S P M. Dia rasa tercabar melihat staf baru yang pandai bercakap, dan disayangi bos.
 - [ ] 20 Namun, dia mula sedar. Dia tidak perlu bersaing untuk menjadi bintang di pentas. Dia adalah arkitek di belakang tabir. Dia tidak perlu menjadi orang lain untuk dihargai.
 - [ ] 21 Bab lima. Kemenangan sebenar.
 - [ ] 22 Maliki berhenti meminta pengiktirafan daripada orang yang salah. Dia belajar melepaskan. Jawatan yang tak diberi. Juruacara yang tak dipilih. Perhatian bos yang tak kunjung tiba.
