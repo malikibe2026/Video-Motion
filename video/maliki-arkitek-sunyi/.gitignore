@@ -1,4 +1,4 @@
 out/*
-!out/*.mp4
-out/*.no-bed.mp4
+!out/*-compressed.mp4
+!out/thumbnail.png
 scratch/
