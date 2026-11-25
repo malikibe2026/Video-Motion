@@ -7,107 +7,133 @@
  "scenes": [
   {
    "file": "scenes/01-tajuk.html",
-   "duration": 7
+   "duration": 7,
+   "audio": "voice/trim/01.wav"
   },
   {
    "file": "scenes/02-kenali.html",
-   "duration": 9
+   "duration": 12.1,
+   "audio": "voice/trim/02.wav"
   },
   {
    "file": "scenes/03-remuk.html",
-   "duration": 8
+   "duration": 8,
+   "audio": "voice/trim/03.wav"
   },
   {
    "file": "scenes/04-bab1.html",
-   "duration": 4
+   "duration": 4,
+   "audio": "voice/trim/04.wav"
   },
   {
    "file": "scenes/05-toksik.html",
-   "duration": 10
+   "duration": 10,
+   "audio": "voice/trim/05.wav"
   },
   {
    "file": "scenes/06-burnout.html",
-   "duration": 9
+   "duration": 9,
+   "audio": "voice/trim/06.wav"
   },
   {
    "file": "scenes/07-keajaiban.html",
-   "duration": 13
+   "duration": 15.1,
+   "audio": "voice/trim/07.wav"
   },
   {
    "file": "scenes/08-pergi.html",
-   "duration": 8
+   "duration": 8,
+   "audio": "voice/trim/08.wav"
   },
   {
    "file": "scenes/09-bab2.html",
-   "duration": 4
+   "duration": 4.9,
+   "audio": "voice/trim/09.wav"
   },
   {
    "file": "scenes/10-jarak.html",
-   "duration": 9
+   "duration": 10.6,
+   "audio": "voice/trim/10.wav"
   },
   {
    "file": "scenes/11-meja.html",
-   "duration": 10
+   "duration": 10,
+   "audio": "voice/trim/11.wav"
   },
   {
    "file": "scenes/12-mesyuarat.html",
-   "duration": 10
+   "duration": 10.8,
+   "audio": "voice/trim/12.wav"
   },
   {
    "file": "scenes/13-terendah.html",
-   "duration": 7
+   "duration": 7,
+   "audio": "voice/trim/13.wav"
   },
   {
    "file": "scenes/14-bab3.html",
-   "duration": 4
+   "duration": 4,
+   "audio": "voice/trim/14.wav"
   },
   {
    "file": "scenes/15-tabir.html",
-   "duration": 12
+   "duration": 16.6,
+   "audio": "voice/trim/15.wav"
   },
   {
    "file": "scenes/16-hermes.html",
-   "duration": 12
+   "duration": 14.4,
+   "audio": "voice/trim/16.wav"
   },
   {
    "file": "scenes/17-masjid.html",
-   "duration": 14
+   "duration": 14,
+   "audio": "voice/trim/17.wav"
   },
   {
    "file": "scenes/18-bab4.html",
-   "duration": 4
+   "duration": 4,
+   "audio": "voice/trim/18.wav"
   },
   {
    "file": "scenes/19-keraguan.html",
-   "duration": 12
+   "duration": 16.1,
+   "audio": "voice/trim/19.wav"
   },
   {
    "file": "scenes/20-kesedaran.html",
-   "duration": 13
+   "duration": 13,
+   "audio": "voice/trim/20.wav"
   },
   {
    "file": "scenes/21-bab5.html",
-   "duration": 4
+   "duration": 4,
+   "audio": "voice/trim/21.wav"
   },
   {
    "file": "scenes/22-lepaskan.html",
-   "duration": 10
+   "duration": 13.6,
+   "audio": "voice/trim/22.wav"
   },
   {
    "file": "scenes/23-keluarga.html",
-   "duration": 10
+   "duration": 10,
+   "audio": "voice/trim/23.wav"
   },
   {
    "file": "scenes/24-empayar.html",
-   "duration": 11
+   "duration": 11,
+   "audio": "voice/trim/24.wav"
   },
   {
    "file": "scenes/25-identiti.html",
-   "duration": 9
+   "duration": 9,
+   "audio": "voice/trim/25.wav"
   },
   {
    "file": "scenes/26-pesan.html",
-   "duration": 17
+   "duration": 17,
+   "audio": "voice/trim/26.wav"
   }
  ]
 }

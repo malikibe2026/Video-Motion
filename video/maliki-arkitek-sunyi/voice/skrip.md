@@ -23,12 +23,15 @@ Satu klip setiap babak: voice/NN.mp3. Status: [x] siap, [ ] belum.
 - [x] 18 Bab empat. Konflik batin.
 - [x] 19 Maliki sering terfikir untuk berhenti kerja. Dia rasa dirinya lambat faham dalam kursus S A S, walaupun dulu dia mendapat enam A dalam S P M. Dia rasa tercabar melihat staf baru yang pandai bercakap, dan disayangi bos.
 - [x] 20 Namun, dia mula sedar. Dia tidak perlu bersaing untuk menjadi bintang di pentas. Dia adalah arkitek di belakang tabir. Dia tidak perlu menjadi orang lain untuk dihargai.
-- [ ] 21 Bab lima. Kemenangan sebenar.
-- [ ] 22 Maliki berhenti meminta pengiktirafan daripada orang yang salah. Dia belajar melepaskan. Jawatan yang tak diberi. Juruacara yang tak dipilih. Perhatian bos yang tak kunjung tiba.
-- [ ] 23 Dia memilih untuk fokus pada isteri dan anaknya. Dan pada ketenangan hatinya sendiri.
-- [ ] 24 Dia terus membina empayar A I nya. Dalam dunia kerajaan yang bising ini, dia adalah kuda yang tidak perlu berlari untuk orang lain.
-- [ ] 25 Dia adalah Maliki. Sang pembina sunyi, yang memegang kawalan sebenar di sebalik tabir teknologi.
-- [ ] 26a Kau mungkin tidak diiktiraf di permukaan. Tetapi ketahuilah, kau memegang kuasa yang tidak dimiliki oleh mereka yang bising.
-- [ ] 26b [softly] Kau bukan gagal. Kau cuma sedang berehat... selepas bertarung.   (diletakkan pada 9.0 s babak 26)
+- [x] 21 Bab lima. Kemenangan sebenar.
+- [x] 22 Maliki berhenti meminta pengiktirafan daripada orang yang salah. Dia belajar melepaskan. Jawatan yang tak diberi. Juruacara yang tak dipilih. Perhatian bos yang tak kunjung tiba.
+- [x] 23 Dia memilih untuk fokus pada isteri dan anaknya. Dan pada ketenangan hatinya sendiri.
+- [x] 24 Dia terus membina empayar A I nya. Dalam dunia kerajaan yang bising ini, dia adalah kuda yang tidak perlu berlari untuk orang lain.
+- [x] 25 Dia adalah Maliki. Sang pembina sunyi, yang memegang kawalan sebenar di sebalik tabir teknologi.
+- [x] 26a Kau mungkin tidak diiktiraf di permukaan. Tetapi ketahuilah, kau memegang kuasa yang tidak dimiliki oleh mereka yang bising.
+- [x] 26b [softly] Kau bukan gagal. Kau cuma sedang berehat... selepas bertarung.   (diletakkan pada 9.0 s babak 26)
 
 Penyusunan: tempoh babak = maks(tempoh asal, panjang klip + 0.8 s). Tiada muzik, tiada kesan bunyi.
+
+Babak 21–26 dijana sebagai satu klip (voice/21-26-gabung.mp3) dan dipotong pada 6 jeda panjang.
+Klip yang dipakai dalam video: voice/trim/NN.wav (senyap di hujung dipangkas; babak 26 = 26a, kemudian 26b pada 8.7 s).
