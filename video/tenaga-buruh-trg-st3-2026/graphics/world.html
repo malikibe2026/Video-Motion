@@ -1,0 +1,264 @@
+<template id="world-tpl">
+  <div data-composition-id="world-comp" data-width="1920" data-height="1080" data-duration="71.00">
+    <style>
+      .w-lbl { position:absolute; font:700 40px/1.1 Ftitle, sans-serif; color:#F0F9FF; white-space:nowrap; }
+      .w-sub { position:absolute; font:600 30px/1.2 Fbody, sans-serif; color:#CBD5E1; white-space:nowrap; }
+      .w-note { position:absolute; font:500 28px/1.2 Fbody, sans-serif; color:#94A3B8; white-space:nowrap; }
+      .w-num { position:absolute; font:900 144px/0.95 Ftitle, sans-serif; letter-spacing:-0.04em; font-variant-numeric:tabular-nums; white-space:nowrap; translate:-50% 0; text-shadow:0 18px 48px rgba(0,0,0,.6); }
+      .w-num small { font-size:52px; font-weight:700; letter-spacing:0; margin-left:12px; color:#CBD5E1; }
+      .w-ctr { translate:-50% 0; text-align:center; }
+      .w-leg { position:absolute; display:flex; align-items:baseline; gap:22px; white-space:nowrap; }
+      .w-leg b { font:900 92px/1 Ftitle, sans-serif; letter-spacing:-0.03em; }
+      .w-leg span { font:700 40px/1.1 Ftitle, sans-serif; color:#F0F9FF; }
+      .w-box { position:absolute; white-space:nowrap; padding:16px 28px; border-radius:18px; background:#0B1426E6; border:2px solid #38BDF8; }
+      .w-box .t { font:700 34px/1.1 Ftitle, sans-serif; color:#E0F2FE; }
+      .w-box .v { font:900 58px/1.1 Ftitle, sans-serif; color:#7DD3FC; margin-top:6px; }
+      .w-head { position:absolute; font:800 46px/1.1 Ftitle, sans-serif; color:#F0F9FF; white-space:nowrap; }
+      .w-src { border-radius:14px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.6); }
+      .w-src img { height:640px; display:block; }
+    </style>
+    <div class="st-stage blueprint">
+      <canvas id="backdrop" class="st-backdrop" data-layout-allow-overflow></canvas>
+      <div id="cam-shake" class="st-cam-shake"><div id="cam-pivot" class="st-cam-pivot"><div id="cam" class="st-cam">
+
+        <!-- ZONE A: hook (x = 0) -->
+        <svg style="position:absolute;left:-1000px;top:-500px;overflow:visible" width="2000" height="1000" viewBox="-1000 -500 2000 1000" data-layout-allow-overflow>
+          <path id="arrA" d="M -640 60 L -560 90 L -500 75 L -400 150 L -320 170" fill="none" stroke="#34D399" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="arrA2" d="M -350 140 L -318 171 L -360 182" fill="none" stroke="#34D399" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="arrB" d="M 300 60 L 380 90 L 440 75 L 540 150 L 620 170" fill="none" stroke="#F87171" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="arrB2" d="M 590 140 L 622 171 L 580 182" fill="none" stroke="#F87171" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          <line id="divA" x1="0" y1="-300" x2="0" y2="220" stroke="#38BDF8" stroke-opacity="0.35" stroke-width="3" stroke-dasharray="10 12"/>
+        </svg>
+        <div id="badgeA" class="st-badge gold" style="left:-470px;top:-300px">PENGANGGUR</div>
+        <div id="numA" class="w-num" style="left:-470px;top:-220px;color:#FDE68A"><span id="numAv">14.6</span><small>ribu</small></div>
+        <div id="deltaA" class="st-badge green" style="left:-470px;top:235px">−0.4 ribu</div>
+        <div id="badgeB" class="st-badge cyan" style="left:470px;top:-300px">PENDUDUK BEKERJA</div>
+        <div id="numB" class="w-num" style="left:470px;top:-220px;color:#7DD3FC"><span id="numBv">497.6</span><small>ribu</small></div>
+        <div id="deltaB" class="st-badge crimson" style="left:470px;top:235px">−1.4 ribu</div>
+        <div id="periodA" class="w-note w-ctr" style="left:-470px;top:-30px">ST2 → ST3 2026</div>
+        <div id="periodB" class="w-note w-ctr" style="left:470px;top:-30px">ST2 → ST3 2026</div>
+        <div id="qmark" class="st-kinetic gold" style="left:0px;top:-150px;translate:-50% 0;font-size:160px">?</div>
+
+        <!-- ZONE B: 100-person grid (x = 2600) -->
+        <div id="gridHead" class="w-head" style="left:2160px;top:-445px">Setiap 100 penduduk umur bekerja</div>
+        <svg id="gridSvg" style="position:absolute;left:2000px;top:-500px;overflow:visible" width="1600" height="900" viewBox="2000 -500 1600 900" data-layout-allow-overflow>
+          <g id="icons"></g>
+          <path id="olTB" d="M 2153 -357 H 2747 V -5 H 2221 V 59 H 2153 Z" fill="none" stroke="#38BDF8" stroke-width="5" stroke-linejoin="round"/>
+          <path id="olLTB" d="M 2221 1 H 2747 V 237 H 2153 V 65 H 2221 Z" fill="none" stroke="#A78BFA" stroke-width="5" stroke-linejoin="round"/>
+        </svg>
+        <div id="leg1" class="w-leg" style="left:2840px;top:-360px"><b style="color:#7DD3FC">59</b><span>bekerja</span></div>
+        <div id="leg2" class="w-leg" style="left:2840px;top:-235px"><b style="color:#FDE68A">2</b><span>menganggur</span></div>
+        <div id="boxTB" class="w-box" style="left:2840px;top:-125px"><div class="t">Tenaga buruh</div><div class="v">510.4 ribu · 60.9%</div></div>
+        <div id="leg3" class="w-leg" style="left:2840px;top:70px"><b style="color:#DDD6FE">39</b><span>luar tenaga buruh</span></div>
+        <div id="ltbNum" class="w-lbl" style="left:2845px;top:175px;font-size:54px;color:#DDD6FE"><span id="ltbV">323.0</span> ribu</div>
+        <div id="ltbDelta" class="st-badge violet" style="left:3330px;top:205px">+4.3 ribu</div>
+        <div id="gridNote" class="w-note" style="left:2160px;top:255px">Dikira daripada data ST3 2026, dibundarkan</div>
+
+        <!-- ZONE C: bar chart (x = 5200) -->
+        <div id="chTitle1" class="w-head w-ctr" style="left:5200px;top:-450px">Kadar pengangguran</div>
+        <div id="chTitle2" class="w-head w-ctr" style="left:5200px;top:-450px">Kadar penyertaan tenaga buruh</div>
+        <svg style="position:absolute;left:4500px;top:-500px;overflow:visible" width="1400" height="900" viewBox="4500 -500 1400 900" data-layout-allow-overflow>
+          <line id="baseC" x1="4620" y1="200" x2="5780" y2="200" stroke="#94A3B8" stroke-width="3"/>
+          <rect id="bar0" x="4690" y="200" width="220" height="0" rx="10" fill="#FBBF24"/>
+          <rect id="bar1" x="5090" y="200" width="220" height="0" rx="10" fill="#FBBF24"/>
+          <rect id="bar2" x="5490" y="200" width="220" height="0" rx="10" fill="#FBBF24"/>
+        </svg>
+        <div id="val0" class="w-lbl w-ctr" style="left:4800px;top:0px;font-size:58px">3.2%</div>
+        <div id="val1" class="w-lbl w-ctr" style="left:5200px;top:0px;font-size:58px">2.9%</div>
+        <div id="val2" class="w-lbl w-ctr" style="left:5600px;top:0px;font-size:58px">2.8%</div>
+        <div class="w-sub w-ctr" style="left:4800px;top:220px">ST1 2026</div>
+        <div class="w-sub w-ctr" style="left:5200px;top:220px">ST2 2026</div>
+        <div class="w-sub w-ctr" style="left:5600px;top:220px">ST3 2026</div>
+        <div id="axNote" class="w-note w-ctr" style="left:5200px;top:-380px">Paksi bermula dari sifar</div>
+        <div id="chBadge1" class="st-badge green" style="left:5880px;top:-170px">Turun 3 suku</div>
+        <div id="chBadge2" class="st-badge violet" style="left:5880px;top:-170px">−0.4 mata peratus</div>
+
+        <!-- ZONE D: summary (x = 7800) -->
+        <svg style="position:absolute;left:7000px;top:-500px;overflow:visible" width="1600" height="900" viewBox="7000 -500 1600 900" data-layout-allow-overflow>
+          <path id="dDown" d="M 7400 -330 V -160 M 7340 -220 L 7400 -158 L 7460 -220" fill="none" stroke="#34D399" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="dUp" d="M 8200 -160 V -330 M 8140 -270 L 8200 -332 L 8260 -270" fill="none" stroke="#A78BFA" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div id="dL" class="w-ctr" style="position:absolute;left:7400px;top:-120px">
+          <div class="w-lbl" style="position:static;text-align:center">Penganggur</div>
+          <div class="st-kinetic lg green" style="position:static;margin-top:14px">−0.4<small style="font-size:52px;margin-left:12px;letter-spacing:0;font-weight:700">ribu</small></div>
+        </div>
+        <div id="dR" class="w-ctr" style="position:absolute;left:8200px;top:-120px">
+          <div class="w-lbl" style="position:static;text-align:center">Luar tenaga buruh</div>
+          <div class="st-kinetic lg violet" style="position:static;margin-top:14px">+4.3<small style="font-size:52px;margin-left:12px;letter-spacing:0;font-weight:700">ribu</small></div>
+        </div>
+        <div id="dNote" class="w-sub w-ctr" style="left:7800px;top:200px">ST3 berbanding ST2 2026</div>
+
+        <!-- ZONE E: source (x = 10200) -->
+        <div id="srcImg" class="w-src" style="position:absolute;left:9560px;top:-430px"><img id="srcImgEl" src="../assets/media/infografik-st3-2026.jpg" alt=""></div>
+        <div id="srcTxt" data-layout-allow-overflow style="position:absolute;left:10120px;top:-260px">
+          <div class="st-badge cyan" style="position:static;translate:none;display:inline-block">SUMBER</div>
+          <div class="w-lbl" style="position:static;margin-top:30px;font-size:58px">Jabatan Perangkaan Malaysia</div>
+          <div class="w-lbl" style="position:static;margin-top:12px;font-size:44px;color:#7DD3FC">Negeri Terengganu</div>
+          <div class="w-sub" style="position:static;margin-top:26px">Statistik Tenaga Buruh, Suku Ketiga 2026</div>
+        </div>
+
+      </div></div></div>
+    </div>
+    <script>
+      const stage = ExplainerStage.create("world-comp");
+      const S = (id) => stage.scene(id).start;
+      const tl = stage.tl;
+      stage.camInit({ x: -470, y: 0, scale: 1.25 }).mountBackdrop("#backdrop", { preset: "blueprint" });
+
+      // hide everything that pops in later
+      const later = ["#badgeA","#numA","#deltaA","#badgeB","#numB","#deltaB","#periodA","#periodB","#qmark",
+        "#gridHead","#leg1","#leg2","#boxTB","#leg3","#ltbNum","#ltbDelta","#gridNote",
+        "#chTitle1","#chTitle2","#val0","#val1","#val2","#axNote","#chBadge1","#chBadge2",
+        "#dL","#dR","#dNote","#srcImg","#srcTxt"];
+      gsap.set(later, { autoAlpha: 0 });
+
+      // ---- s01: penganggur ----
+      stage.popIn("#badgeA", S("s01") + 0.15, { fromScale: 0.8 });
+      stage.popIn("#numA", S("s01") + 0.35, { fromScale: 0.9, y: 30 });
+      stage.popIn("#periodA", S("s01") + 0.6);
+      stage.counter("#numAv", 14.6, 14.2, S("s01") + 1.2, 1.6, (v) => v.toFixed(1));
+      stage.drawStroke("#arrA", S("s01") + 1.2, 1.2).drawStroke("#arrA2", S("s01") + 2.3, 0.3);
+      stage.stampSlam("#deltaA", S("s01") + 2.8, { rot: -4 });
+      stage.camTo(S("s01") + 1.0, { x: -470, y: 0, scale: 1.12, dur: 4.2, ease: "sine.inOut" });
+
+      // ---- s02: penduduk bekerja ----
+      stage.whipTo(S("s02"), { x: 470, y: 0, scale: 1.2 });
+      stage.popIn("#badgeB", S("s02") + 0.25, { fromScale: 0.8 });
+      stage.popIn("#numB", S("s02") + 0.4, { fromScale: 0.9, y: 30 });
+      stage.popIn("#periodB", S("s02") + 0.6);
+      stage.counter("#numBv", 497.6, 496.2, S("s02") + 1.0, 1.6, (v) => v.toFixed(1));
+      stage.drawStroke("#arrB", S("s02") + 1.0, 1.2).drawStroke("#arrB2", S("s02") + 2.1, 0.3);
+      stage.stampSlam("#deltaB", S("s02") + 2.5, { rot: 4 });
+      stage.camTo(S("s02") + 3.0, { x: 0, y: 0, scale: 0.92, dur: 1.6, ease: "power2.inOut" });
+      stage.drawStroke("#divA", S("s02") + 3.3, 0.8);
+      stage.kineticPunch("#qmark", S("s02") + 4.2);
+
+      // ---- s03..s08: grid ----
+      stage.whipTo(S("s03"), { x: 2600, y: -40, scale: 1.0 });
+      stage.popIn("#gridHead", S("s03") + 0.3, { y: 20 });
+      stage.popIn("#gridNote", S("s03") + 1.8);
+      stage.camTo(S("s03") + 1.0, { x: 2560, y: -40, scale: 1.05, dur: 4.5, ease: "sine.inOut" });
+
+      // icons (snake order so index 59 and 60 sit next to each other)
+      const NS = "http://www.w3.org/2000/svg";
+      const GX = 2160, GY = -350, C = 58;
+      const icons = [];
+      const gEl = document.getElementById("icons");
+      for (let i = 0; i < 100; i++) {
+        const r = Math.floor(i / 10), k = i % 10;
+        const col = r % 2 === 0 ? k : 9 - k;
+        const cx = GX + col * C + C / 2, cy = GY + r * C + C / 2;
+        const g = document.createElementNS(NS, "g");
+        const head = document.createElementNS(NS, "circle");
+        head.setAttribute("cx", 0); head.setAttribute("cy", -12); head.setAttribute("r", 10);
+        const body = document.createElementNS(NS, "path");
+        body.setAttribute("d", "M -15 21 V 9 Q -15 -1 0 -1 Q 15 -1 15 9 V 21 Z");
+        g.appendChild(head); g.appendChild(body);
+        gEl.appendChild(g);
+        icons.push({ g, cx, cy, i });
+      }
+      const GREY = [71, 85, 105], BLUE = [56, 189, 248], AMBER = [251, 191, 36], VIOLET = [167, 139, 250];
+      const mix = (a, b, p) => "rgb(" + a.map((v, j) => Math.round(v + (b[j] - v) * p)).join(",") + ")";
+      const cl = (x) => Math.max(0, Math.min(1, x));
+      const backOut = (p) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+      stage.onTick((t) => {
+        for (const ic of icons) {
+          const i = ic.i;
+          const pa = cl((t - (S("s03") + 0.5 + i * 0.013)) / 0.35);
+          let s = pa <= 0 ? 0 : backOut(pa);
+          let target = null, tc = 0, dur = 0.35;
+          if (i < 59) { target = BLUE; tc = S("s04") + 0.3 + i * 0.02; }
+          else if (i < 61) { target = AMBER; tc = S("s05") + 0.6; }
+          else { target = VIOLET; tc = S("s07") + 0.3 + (i - 61) * 0.025; }
+          const pc = cl((t - tc) / dur);
+          let fill = target ? mix(GREY, target, pc) : mix(GREY, GREY, 0);
+          // amber pulse in s05
+          if (i === 59 || i === 60) {
+            const u = t - (S("s05") + 0.6);
+            if (u > 0 && u < 1.6) s *= 1 + 0.35 * Math.sin(Math.PI * u / 1.6);
+          }
+          // violet breathe in s08
+          if (i >= 61) {
+            const u = t - (S("s08") + 0.8);
+            if (u > 0 && u < 3.0) s *= 1 + 0.12 * Math.sin(Math.PI * u / 1.5) ** 2;
+          }
+          // dim non-labour-force in s06, non-violet in s08
+          let op = 1;
+          if (t > S("s06") + 0.4 && t < S("s07")) op = i >= 61 ? 0.35 : 1;
+          if (t > S("s08") + 0.3 && t < S("s09")) op = i >= 61 ? 1 : 0.35;
+          ic.g.setAttribute("transform", `translate(${ic.cx},${ic.cy}) scale(${s.toFixed(3)})`);
+          ic.g.setAttribute("fill", fill);
+          ic.g.setAttribute("opacity", op);
+        }
+      });
+
+      stage.popIn("#leg1", S("s04") + 0.6, { fromScale: 0.85, y: 20 });
+      stage.camTo(S("s04") + 0.2, { x: 2640, y: -60, scale: 1.0, dur: 4.6, ease: "sine.inOut" });
+      stage.popIn("#leg2", S("s05") + 0.8, { fromScale: 0.85, y: 20 });
+      stage.camTo(S("s05") + 0.2, { x: 2600, y: -40, scale: 1.06, dur: 5.0, ease: "sine.inOut" });
+      stage.drawStroke("#olTB", S("s06") + 0.4, 1.4);
+      stage.popIn("#boxTB", S("s06") + 1.2, { fromScale: 0.9, y: 20 });
+      stage.camTo(S("s06") + 0.2, { x: 2680, y: -80, scale: 1.0, dur: 6.4, ease: "sine.inOut" });
+      stage.popIn("#leg3", S("s07") + 1.0, { fromScale: 0.85, y: 20 });
+      stage.drawStroke("#olLTB", S("s07") + 1.6, 1.2);
+      stage.camTo(S("s07") + 0.2, { x: 2620, y: 0, scale: 1.04, dur: 6.4, ease: "sine.inOut" });
+      stage.camTo(S("s08") + 0.2, { x: 2760, y: 30, scale: 1.12, dur: 1.4, ease: "power2.inOut" });
+      stage.popIn("#ltbNum", S("s08") + 0.6, { y: 16 });
+      stage.counter("#ltbV", 323.0, 327.3, S("s08") + 1.0, 2.2, (v) => v.toFixed(1));
+      stage.stampSlam("#ltbDelta", S("s08") + 3.4, { rot: -5 });
+      stage.camTo(S("s08") + 1.8, { x: 2790, y: 40, scale: 1.16, dur: 4.6, ease: "sine.inOut" });
+
+      // ---- s09..s10: chart ----
+      stage.whipTo(S("s09"), { x: 5200, y: -80, scale: 1.0 });
+      stage.popIn("#chTitle1", S("s09") + 0.2, { y: 20 });
+      stage.popIn("#axNote", S("s09") + 0.6);
+      stage.camTo(S("s09") + 1.2, { x: 5240, y: -80, scale: 1.05, dur: 5.0, ease: "sine.inOut" });
+      const UR = [3.2, 2.9, 2.8], LF = [61.3, 61.3, 60.9];
+      const H = 480;
+      const bars = [0, 1, 2].map((k) => document.getElementById("bar" + k));
+      const vals = [0, 1, 2].map((k) => document.getElementById("val" + k));
+      const ease = (p) => p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      stage.onTick((t) => {
+        const m = ease(cl((t - (S("s10") + 0.4)) / 1.1));
+        for (let k = 0; k < 3; k++) {
+          const g = ease(cl((t - (S("s09") + 0.5 + k * 0.6)) / 0.8));
+          const hUR = UR[k] / 4 * H, hLF = LF[k] / 100 * H;
+          const h = g * (hUR + (hLF - hUR) * m);
+          bars[k].setAttribute("height", h.toFixed(1));
+          bars[k].setAttribute("y", (200 - h).toFixed(1));
+          bars[k].setAttribute("fill", mix(AMBER, BLUE, m));
+          vals[k].style.top = (200 - h - 78).toFixed(1) + "px";
+          vals[k].textContent = (m < 0.5 ? UR[k] : LF[k]).toFixed(1) + "%";
+          const vis = cl((t - (S("s09") + 0.9 + k * 0.6)) / 0.3);
+          const swap = 1 - Math.sin(Math.PI * cl((m - 0.3) / 0.4)) * 0.9;
+          vals[k].style.opacity = (vis * swap).toFixed(3);
+          vals[k].style.visibility = vis > 0 ? "visible" : "hidden";
+        }
+      });
+      stage.popIn("#chBadge1", S("s09") + 3.6, { fromScale: 0.8 });
+      stage.fadeOut("#chBadge1", S("s10") + 0.2, 0.3);
+      stage.fadeOut("#chTitle1", S("s10") + 0.3, 0.3);
+      stage.popIn("#chTitle2", S("s10") + 0.6, { y: 20 });
+      stage.camTo(S("s10") + 0.3, { x: 5300, y: -90, scale: 1.0, dur: 5.0, ease: "sine.inOut" });
+      stage.stampSlam("#chBadge2", S("s10") + 2.4, { rot: -4 });
+
+      // ---- s11: summary ----
+      stage.whipTo(S("s11"), { x: 7800, y: -40, scale: 1.08 });
+      stage.drawStroke("#dDown", S("s11") + 0.3, 0.8);
+      stage.popIn("#dL", S("s11") + 0.5, { fromScale: 0.85, y: 24 });
+      stage.drawStroke("#dUp", S("s11") + 1.8, 0.8);
+      stage.popIn("#dR", S("s11") + 2.0, { fromScale: 0.85, y: 24 });
+      stage.popIn("#dNote", S("s11") + 3.0);
+      stage.camTo(S("s11") + 0.8, { x: 7800, y: -60, scale: 0.98, dur: 5.4, ease: "sine.inOut" });
+
+      // ---- s12: source ----
+      stage.whipTo(S("s12"), { x: 10200, y: -60, scale: 1.0 });
+      stage.popIn("#srcImg", S("s12") + 0.2, { fromScale: 0.94, y: 24 });
+      stage.kenBurns("#srcImgEl", S("s12") + 0.2, S("s12") + 5.0, { fromScale: 1.0, toScale: 1.06 });
+      stage.popIn("#srcTxt", S("s12") + 0.6, { y: 24 });
+      stage.camTo(S("s12") + 0.6, { x: 10240, y: -60, scale: 1.04, dur: 4.4, ease: "sine.inOut" });
+
+      stage.finalize();
+    </script>
+  </div>
+</template>
